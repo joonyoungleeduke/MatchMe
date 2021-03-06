@@ -9,16 +9,20 @@ Query {
 * deletePost(user_id: ID, post_id: ID): Post 
 * post(post_id: ID): Post 
 * posts(user_id: ID): [Post]
+* similarPosts(post_id: ID): [Post]
+* trendingPosts(): [Post]
 * createMatch(user_id: ID, post_id: ID)
 * removeMatch(user_id: ID, match_id: ID): Match 
 * match(match_id: ID): Match
 * matches(user_id: ID): [Match]
-* createGroup(user_id: ID, name: String, description: String): Group 
+* createGroup(user_id: ID, name: String, description: String, theme: String): Group 
 * editGroup(...inners of create_group): Group 
 * leaveGroup(user_id: ID, group_id: ID): Group
 * deleteGroup(user_id: ID, group_id: ID): Group
 * group(group_id: ID): Group 
 * groups(user_id: ID): [Group]
+* similarGroups(group_id: ID): [Group]
+* suggestedGroups(group_id: ID): [Group]
 
 }
 
@@ -33,14 +37,19 @@ Post {
 * group: Group 
 
 * matches: [Match]
+* hearts: [Heart]
 
 }
 
 User {
 
 * id: ID 
-* name: String 
-* username: String 
+* profilePicture: Img 
+* firstName: String 
+* lastName: String 
+* username: String  
+* bio: String 
+* hearts: [Heart]
 * matchesDone: [Match]
 * posts: [Post]
 * groups: [Group]
@@ -57,11 +66,20 @@ Match {
 
 }
 
+Heart {
+
+* id: ID
+* owner: User
+* post: Post 
+
+}
+
 Group {
 
 * id: ID 
 * name: String
 * description: String 
+* theme: String 
 
 * owner: User 
 * posts: [Post]
