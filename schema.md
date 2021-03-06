@@ -1,28 +1,33 @@
 Query {
 
 * login(username: String): User 
-* register(username: String): User 
 * user(id: ID): User
 * users: [User]
-* createPost(user_id: ID, group_id: ID, title: String, body: String, target_matches: Int): Post  
-* editPost(...inners of create_post): Post 
-* deletePost(user_id: ID, post_id: ID): Post 
 * post(post_id: ID): Post 
 * posts(user_id: ID): [Post]
 * similarPosts(post_id: ID): [Post]
 * trendingPosts(): [Post]
-* createMatch(user_id: ID, post_id: ID)
-* removeMatch(user_id: ID, match_id: ID): Match 
 * match(match_id: ID): Match
 * matches(user_id: ID): [Match]
-* createGroup(user_id: ID, name: String, description: String, theme: String): Group 
-* editGroup(...inners of create_group): Group 
-* leaveGroup(user_id: ID, group_id: ID): Group
-* deleteGroup(user_id: ID, group_id: ID): Group
 * group(group_id: ID): Group 
 * groups(user_id: ID): [Group]
 * similarGroups(group_id: ID): [Group]
 * suggestedGroups(group_id: ID): [Group]
+
+}
+
+Mutation {
+
+* register(username: String): User 
+* createPost(user_id: ID, group_id: ID, title: String, body: String, target_matches: Int): Post  
+* editPost(...inners of create_post): Post 
+* deletePost(user_id: ID, post_id: ID): Post 
+* createMatch(user_id: ID, post_id: ID)
+* removeMatch(user_id: ID, match_id: ID): Match 
+* createGroup(user_id: ID, name: String, description: String, theme: String): Group 
+* editGroup(...inners of create_group): Group 
+* leaveGroup(user_id: ID, group_id: ID): Group
+* deleteGroup(user_id: ID, group_id: ID): Group
 
 }
 
@@ -33,7 +38,7 @@ Post {
 * body: String 
 * targetMatches: Int 
 
-* author: User 
+* owner: User 
 * group: Group 
 
 * matches: [Match]
@@ -82,8 +87,15 @@ Group {
 * theme: String 
 
 * owner: User 
+* members: [User]
 * posts: [Post]
 
-* users: [User!]
+}
+
+Comment {
+
+* id: ID
+* owner: User
+* post: Post 
 
 }
