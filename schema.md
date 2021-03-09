@@ -1,16 +1,15 @@
 Query {
 
-* login(username: String, password: String): User 
-* user(id: ID): User
+* user(username: String!): User
 * users: [User]
 * post(post_id: ID): Post 
-* posts(user_id: ID): [Post]
+* posts(): [Post]
 * similarPosts(post_id: ID): [Post]
 * trendingPosts(): [Post]
 * match(match_id: ID): Match
-* matches(user_id: ID): [Match]
+* matches(): [Match]
 * group(group_id: ID): Group 
-* groups(user_id: ID): [Group]
+* groups(): [Group]
 * similarGroups(group_id: ID): [Group]
 * suggestedGroups(group_id: ID): [Group]
 
@@ -18,16 +17,17 @@ Query {
 
 Mutation {
 
+* tokenAuth(username: String, password: String): token, payload, refreshExpiresIn
 * register(username: String, password: String, email: String): User 
-* createPost(user_id: ID, group_id: ID, title: String, body: String, target_matches: Int): Post  
+* createPost(group_id: ID, title: String, body: String, target_matches: Int): Post  
 * editPost(...inners of create_post): Post 
-* deletePost(user_id: ID, post_id: ID): Post 
-* createMatch(user_id: ID, post_id: ID)
-* removeMatch(user_id: ID, match_id: ID): Match 
-* createGroup(user_id: ID, name: String, description: String, theme: String): Group 
+* deletePost(post_id: ID): Post 
+* createMatch(post_id: ID)
+* removeMatch(match_id: ID): Match 
+* createGroup( name: String, description: String, theme: String): Group 
 * editGroup(...inners of create_group): Group 
-* leaveGroup(user_id: ID, group_id: ID): Group
-* deleteGroup(user_id: ID, group_id: ID): Group
+* leaveGroup(group_id: ID): Group
+* deleteGroup(group_id: ID): Group
 
 }
 
