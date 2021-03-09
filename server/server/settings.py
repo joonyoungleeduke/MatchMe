@@ -39,13 +39,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'graphene_django',
-    
+    'graphql_jwt',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     'server.app',
 ]
 
 GRAPHENE = {
-    'SCHEMA': 'server.schema.schema'
+    'SCHEMA': 'server.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
 }
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

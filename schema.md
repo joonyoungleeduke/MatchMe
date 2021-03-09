@@ -1,6 +1,6 @@
 Query {
 
-* login(username: String): User 
+* login(username: String, password: String): User 
 * user(id: ID): User
 * users: [User]
 * post(post_id: ID): Post 
@@ -18,7 +18,7 @@ Query {
 
 Mutation {
 
-* register(username: String): User 
+* register(username: String, password: String, email: String): User 
 * createPost(user_id: ID, group_id: ID, title: String, body: String, target_matches: Int): Post  
 * editPost(...inners of create_post): Post 
 * deletePost(user_id: ID, post_id: ID): Post 
