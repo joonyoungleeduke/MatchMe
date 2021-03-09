@@ -1,4 +1,4 @@
-import json
+from server.app.tests import shared 
 
 def _get_registration_query():
   
@@ -17,6 +17,8 @@ def _get_registration_query():
               email
             }
           }
+          token
+          refreshToken
         }
       }
   '''
@@ -34,17 +36,14 @@ def register_and_verify_user(test_client_instance, user_info):
       'email': email
     }
   )
-  test_client_instance.assertResponseNoErrors(response)
-  content = json.loads(response.content)
-  content = content['data']
-  test_client_instance.assertTrue('registerUser' in content)
-  
-  regUserBody = content['registerUser'] 
-  
-  test_client_instance.assertTrue('user' in regUserBody)
-  test_client_instance.assertTrue('profile' in regUserBody)
+  data = shared.verify_resp_and_get_data(test_client_instance, response)
+  test_client_instance.assertTrue('registerUser' in data)
+  regUserBody = data['registerUser'] 
+  shared.verify_attrs_in_dict(test_client_instance, regUserBody, ('user', 'profile'))
   user_obj, prof_obj = regUserBody['user'], regUserBody['profile']
   user_id, username, email = user_obj['id'], user_obj['username'], user_obj['email']
   prof_owner_obj = prof_obj['owner']
   owner_id, owner_username, owner_email = prof_owner_obj['id'], prof_owner_obj['username'], prof_owner_obj['email']
   test_client_instance.assertEqual([user_id, username, email], [owner_id, owner_username, owner_email])
+  
+  return regUserBody
