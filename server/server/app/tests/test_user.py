@@ -19,11 +19,14 @@ class UserRegistrationTest(GraphQLTestCase):
   @shared.trueIfException
   def test_single_user_no_username(self):
     self.generic_user_no_attr(self.user_info, 'username')
-    self.assertTrue(False)
+
+  @shared.trueIfException
+  def test_single_user_no_password(self):
+    self.generic_user_no_attr(self.user_info, 'password')
     
   def generic_user_no_attr(self, user_info, attr):
     del user_info[attr]
-    registration.register_and_verify_user(self, self.user_info)
+    registration.register_and_verify_user(self, user_info)
   
 class UserLoginTest(GraphQLTestCase):
   
@@ -32,3 +35,19 @@ class UserLoginTest(GraphQLTestCase):
   def test_single_user(self):
     registered_info = registration.register_and_verify_user(self, self.user_info)
     login_info = login.login_verify_and_get_info(self, self.user_info)
+  
+  @shared.trueIfException
+  def test_single_nonexistent_user(self):
+    login.login_verify_and_get_info(self, self.user_info)
+  
+  @shared.trueIfException
+  def test_single_user_no_username(self):
+    self.generic_user_no_attr(self.user_info, 'username')
+    
+  @shared.trueIfException
+  def test_single_user_no_password(self):
+    self.generic_user_no_attr(self.user_info, 'password')
+  
+  def generic_user_no_attr(self, user_info, attr):
+    del user_info[attr]
+    login.login_verify_and_get_info(self, user_info)
