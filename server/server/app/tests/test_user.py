@@ -1,5 +1,7 @@
 from server.app.tests import registration, login, shared, combined_utils, user_requ 
 from graphene_django.utils.testing import GraphQLTestCase
+from graphql_jwt.testcases import JSONWebTokenTestCase
+from django.contrib.auth import get_user_model 
 
 class UserRegistrationTest(GraphQLTestCase):
   
@@ -52,16 +54,18 @@ class UserLoginTest(GraphQLTestCase):
     del user_info[attr]
     login.login_verify_and_get_info(self, user_info)
     
-class UserInfoTest(GraphQLTestCase):
+class UserInfoTest(JSONWebTokenTestCase):
   
   user_info = shared.get_test_user_info()
   
-  def test_query_single_user(self):
-    combined_utils.register_and_login(self, self.user_info)
-    resp = user_requ.get_user_info(self, self.user_info)
+  def setUp(self):
+    self.user = get_user_model().objects.create(username=self.user_info['username'], email=self.user_info['email'])
+    self.client.authenticate(self.user)
+  
+  def test_query_single_user_with_perm(self):
+    resp = user_requ.get_user_info(self.client, self.user_info)
     userInfoObj = resp['userInfo']
     profileObj = userInfoObj['profile']
     userObj = profileObj['owner']
-    resp_username, resp_email = userObj['username'], userObj['email']
-    username, email = self.user_info['username'], self.user_info['email']
-    self.assertEqual([resp_username, resp_email], [username, email])
+    res_username, res_email = userObj['username'], userObj['email']
+    self.assertEqual([self.user_info['username'], self.user_info['email']], [res_username, res_email])

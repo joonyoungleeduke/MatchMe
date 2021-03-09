@@ -1,5 +1,6 @@
 import graphene 
 from graphene_django import DjangoObjectType
+from graphql_jwt.decorators import login_required
 import graphql_jwt
 from django.contrib.auth import get_user_model 
 from server.app.types import UserType, UserProfileType, GroupType, PostType, CommentType, MatchType, HeartType
@@ -24,7 +25,8 @@ class Query(graphene.ObjectType):
       raise Exception('Not logged in')
     return user
   
-  def resolve_user_info(self, info, username):
+  @login_required 
+  def resolve_user_info(self, info, username): 
     return get_user_model().objects.get(username = username)
   
   def resolve_users(self, info):
