@@ -31,9 +31,4 @@ class UserLoginTest(GraphQLTestCase):
   
   def test_single_user(self):
     registered_info = registration.register_and_verify_user(self, self.user_info)
-    reg_user_info = registered_info['user']
-    login_info = login.login_verify_and_get_info(self, reg_user_info)
-    reg_username, reg_password = reg_user_info['username'], reg_user_info['password']
-    login_user_info = login_info['user']
-    login_username, login_password = login_user_info['username'], login_user_info['password']
-    self.assertEqual([reg_username, reg_password], [login_username, login_password])
+    login_info = login.login_verify_and_get_info(self, self.user_info)
