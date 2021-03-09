@@ -59,8 +59,9 @@ class UserInfoTest(GraphQLTestCase):
   def test_query_single_user(self):
     combined_utils.register_and_login(self, self.user_info)
     resp = user_requ.get_user_info(self, self.user_info)
-    profileObj = resp['profile']
-    userObj = profileObj['user']
+    userInfoObj = resp['userInfo']
+    profileObj = userInfoObj['profile']
+    userObj = profileObj['owner']
     resp_username, resp_email = userObj['username'], userObj['email']
     username, email = self.user_info['username'], self.user_info['email']
     self.assertEqual([resp_username, resp_email], [username, email])

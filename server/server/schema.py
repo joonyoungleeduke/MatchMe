@@ -14,7 +14,8 @@ class Mutations(graphene.ObjectType):
   
 class Query(graphene.ObjectType):
   
-  whoami = graphene.Field(UserType)
+  whoami = graphene.Field(UserType) 
+  user_info = graphene.Field(UserType, username=graphene.String(required=True))
   users = graphene.List(UserType)
   
   def resolve_whoami(self, info):
@@ -22,6 +23,9 @@ class Query(graphene.ObjectType):
     if user.is_anonymous:
       raise Exception('Not logged in')
     return user
+  
+  def resolve_user_info(self, info, username):
+    return get_user_model().objects.get(username = username)
   
   def resolve_users(self, info):
     return get_user_model().objects.all()
