@@ -22,7 +22,9 @@ def _get_registration_query():
   '''
 
 def register_and_verify_user(test_client_instance, user_info):
-  username, password, email = user_info['username'], user_info['password'], user_info['email']
+  username = user_info.get('username', None)
+  password = user_info.get('password', None)
+  email = user_info.get('email', None)
   response = test_client_instance.query(
     _get_registration_query(),
     op_name='registerUser',
