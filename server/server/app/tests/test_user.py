@@ -2,90 +2,91 @@ from server.app.tests import registration, login, shared, combined_utils, user_r
 from graphene_django.utils.testing import GraphQLTestCase
 from graphql_jwt.testcases import JSONWebTokenTestCase
 from django.contrib.auth import get_user_model 
+from copy import deepcopy
 
-class UserRegistrationTest(GraphQLTestCase):
-  
-  user_info = shared.get_test_user_info()
+class UserRegistrationTest(GraphQLTestCase, registration.RegistrationTestMixin,
+                            shared.UsersTestMixin, shared.VerificationTestMixin):
   
   def test_single_user(self):
-    registration.register_and_verify_user(self, self.user_info)
+    self.register_and_verify_user(self, self.user_info)
   
-  @shared.trueIfException
+  @shared.ExceptionsTestUtils.trueIfException
   def test_same_user_caught(self):
-    registration.register_and_verify_user(self, self.user_info)
-    registration.register_and_verify_user(self, self. user_info)
+    self.register_and_verify_user(self, self.user_info)
+    self.register_and_verify_user(self, self. user_info)
   
   def test_single_user_no_email(self):
     self.generic_user_no_attr(self.user_info, 'email')
   
-  @shared.trueIfException
+  @shared.ExceptionsTestUtils.trueIfException
   def test_single_user_no_username(self):
     self.generic_user_no_attr(self.user_info, 'username')
 
-  @shared.trueIfException
+  @shared.ExceptionsTestUtils.trueIfException
   def test_single_user_no_password(self):
     self.generic_user_no_attr(self.user_info, 'password')
     
   def generic_user_no_attr(self, user_info, attr):
-    del user_info[attr]
-    registration.register_and_verify_user(self, user_info)
+    user_info_copy = deepcopy(user_info)
+    del user_info_copy[attr]
+    self.register_and_verify_user(self, user_info_copy)
   
-class UserLoginTest(GraphQLTestCase):
-  
-  user_info = shared.get_test_user_info()
+class UserLoginTest(GraphQLTestCase, registration.RegistrationTestMixin,
+                    login.LoginTestMixin, shared.UsersTestMixin,
+                    shared.VerificationTestMixin):
   
   def test_single_user(self):
-    registered_info = registration.register_and_verify_user(self, self.user_info)
-    login_info = login.login_verify_and_get_info(self, self.user_info)
+    registered_info = self.register_and_verify_user(self, self.user_info)
+    login_info = self.login_verify_and_get_info(self, self.user_info)
   
-  @shared.trueIfException
+  @shared.ExceptionsTestUtils.trueIfException
   def test_single_nonexistent_user(self):
-    login.login_verify_and_get_info(self, self.user_info)
+    self.login_verify_and_get_info(self, self.user_info)
   
-  @shared.trueIfException
+  @shared.ExceptionsTestUtils.trueIfException
   def test_single_user_no_username(self):
     self.generic_user_no_attr(self.user_info, 'username')
     
-  @shared.trueIfException
+  @shared.ExceptionsTestUtils.trueIfException
   def test_single_user_no_password(self):
     self.generic_user_no_attr(self.user_info, 'password')
   
   def generic_user_no_attr(self, user_info, attr):
-    del user_info[attr]
-    login.login_verify_and_get_info(self, user_info)
+    user_info_copy = deepcopy(user_info)
+    del user_info_copy[attr]
+    self.login_verify_and_get_info(self, user_info_copy)
     
-class UserInfoTest(JSONWebTokenTestCase):
-  
-  user_info = shared.get_test_user_info()
-  
+class UserInfoTest(JSONWebTokenTestCase, shared.UsersTestMixin,
+                    user_requ.UserRequTestMixin, shared.VerificationTestMixin):
+    
   def authenticate(self):
-    self.user = shared.create_user(self.user_info)
+    self.user = self.create_user(self.user_info)
     self.client.authenticate(self.user)
   
   def test_query_single_user_with_perm(self):
     self.authenticate()
-    resp = user_requ.get_user_info(self.client, self.user_info)
+    resp = self.get_user_info(self.client, self.user_info)
     userInfoObj = resp['userInfo']
     profileObj = userInfoObj['profile']
     userObj = profileObj['owner']
     res_username, res_email = userObj['username'], userObj['email']
     self.assertEqual([self.user_info['username'], self.user_info['email']], [res_username, res_email])
     
-  @shared.trueIfException
+  @shared.ExceptionsTestUtils.trueIfException
   def test_query_single_user_no_perm(self):
-    resp = user_requ.get_user_info(self.client, self.user_info)
+    resp = self.get_user_info(self.client, self.user_info)
   
   def test_query_all_users_with_perm(self):
     self.authenticate()
-    test_users = shared.create_test_users()
-    resp = user_requ.get_users_info(self.client)
+    test_users = self.create_test_users()
+    resp = self.get_users_info(self.client)
     usersInfo = resp['usersInfo']
     success = self.validate_users_info(self.user, test_users, usersInfo)
     self.assertTrue(success)
     
   def test_query_all_users_no_perm(self):
-    test_users = shared.create_test_users()
-    resp = user_requ.get_users_info(self.client)
+    test_users = self.create_test_users()
+    resp = self.get_users_info(self.client)
   
   def validate_users_info(self, owner, created_users, received_users):
     received_usernames = [received_user['username'] for received_user in received_users]

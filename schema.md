@@ -1,7 +1,7 @@
 Query {
 
 * **user(username: String!): User**
-* users: [User]
+* **users: [User]**
 * post(post_id: ID): Post 
 * posts(): [Post]
 * similarPosts(post_id: ID): [Post]
