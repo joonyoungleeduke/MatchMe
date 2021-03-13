@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from copy import deepcopy
 
 class UserRegistrationTest(GraphQLTestCase, registration.RegistrationTestMixin,
-                            shared.UsersTestMixin, shared.VerificationTestMixin):
+                            shared.UsersMixin, shared.VerificationTestMixin):
   
   def test_single_user(self):
     self.register_and_verify_user(self, self.user_info)
@@ -32,7 +32,7 @@ class UserRegistrationTest(GraphQLTestCase, registration.RegistrationTestMixin,
     self.register_and_verify_user(self, user_info_copy)
   
 class UserLoginTest(GraphQLTestCase, registration.RegistrationTestMixin,
-                    login.LoginTestMixin, shared.UsersTestMixin,
+                    login.LoginTestMixin, shared.UsersMixin,
                     shared.VerificationTestMixin):
   
   def test_single_user(self):
@@ -56,8 +56,8 @@ class UserLoginTest(GraphQLTestCase, registration.RegistrationTestMixin,
     del user_info_copy[attr]
     self.login_verify_and_get_info(self, user_info_copy)
     
-class UserInfoTest(shared.UsersTestMixin, user_requ.UserRequTestMixin, 
-                    shared.VerificationTestMixin, shared.JWTAuthMixin):
+class UserInfoTest(shared.JWTAuthAndUsersMixin, user_requ.UserRequTestMixin, 
+                    shared.VerificationTestMixin):
   
   def test_query_single_user_with_perm(self):
     self.authenticate()

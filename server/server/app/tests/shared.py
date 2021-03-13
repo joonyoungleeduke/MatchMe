@@ -39,7 +39,7 @@ class VerificationTestMixin:
   def verify_attrs_in_dict(self, test_client_instance, dict, attrs):
     test_client_instance.assertTrue(all(attr in dict for attr in attrs))
 
-class UsersTestMixin:
+class UsersMixin:
   
   user_info = {
     'username': 'rand',
@@ -74,7 +74,7 @@ class UsersTestMixin:
     
     return users  
   
-class JWTAuthMixin(UsersTestMixin, JSONWebTokenTestCase):
+class JWTAuthAndUsersMixin(UsersMixin, JSONWebTokenTestCase):
   
   def authenticate(self):
     self.user = self.create_user(self.user_info)

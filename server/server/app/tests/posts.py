@@ -11,9 +11,9 @@ class PostTestMixin(shared.VerificationTestMixin):
       self._get_post_query(),
       op_name='newPost',
       variables={
-        'postTitle': post_title,
-        'postBody': post_body,
-        'targetMatches': target_matches,
+        'title': post_title,
+        'body': post_body,
+        'matches': target_matches,
         'group': group,
       }
     )
@@ -22,8 +22,8 @@ class PostTestMixin(shared.VerificationTestMixin):
   def _get_new_post_query(self):
     
     return '''
-      mutation newPost($postTitle: String!, $postBody: String!) {
-        newPost(postTitle: $postTitle, postBody: $postBody) {
+      mutation newPost($title: String!, $body: String!, $matches: Int!, $group: ID!) {
+        newPost(title: $postTitle, body: $postBody, matches: $matches, group: $group) {
           id 
           title 
           body 
