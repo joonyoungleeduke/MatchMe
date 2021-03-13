@@ -17,7 +17,7 @@ class Query(graphene.ObjectType):
   
   whoami = graphene.Field(UserType) 
   user_info = graphene.Field(UserType, username=graphene.String(required=True))
-  users = graphene.List(UserType)
+  users_info = graphene.List(UserType)
   
   def resolve_whoami(self, info):
     user = info.context.user
@@ -29,7 +29,8 @@ class Query(graphene.ObjectType):
   def resolve_user_info(self, info, username): 
     return get_user_model().objects.get(username = username)
   
-  def resolve_users(self, info):
+  @login_required
+  def resolve_users_info(self, info):
     return get_user_model().objects.all()
 
 schema = graphene.Schema(query = Query, mutation = Mutations)

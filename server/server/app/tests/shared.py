@@ -1,4 +1,5 @@
 from functools import wraps 
+from django.contrib.auth import get_user_model 
 import json 
 
 def trueIfException(func):
@@ -37,3 +38,30 @@ def get_test_user_info():
     'password': 'randompw',
     'email': 'random@gmail.com'
   }
+
+def get_test_users_info():
+  
+  letters = "abcdefghijklmnopqrstuvwxyz"
+  password = "simplepw"
+  users = []
+  
+  for letter in letters:
+    user = {
+      'username': letter,
+      'password': password,
+      'email': f'{letter}@gmail.com',
+    }
+    
+    users.append(user)
+  
+  return users 
+
+def create_user(user_info):
+  return get_user_model().objects.create(username = user_info['username'], email = user_info['email'])
+
+def create_users(user_infos):
+  return [create_user(user_info) for user_info in user_infos]
+
+def create_test_users():
+  test_users_info = get_test_users_info()
+  return create_users(test_users_info)

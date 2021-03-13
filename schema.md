@@ -1,6 +1,6 @@
 Query {
 
-* user(username: String!): User
+* **user(username: String!): User**
 * users: [User]
 * post(post_id: ID): Post 
 * posts(): [Post]
@@ -17,8 +17,8 @@ Query {
 
 Mutation {
 
-* tokenAuth(username: String, password: String): token, payload, refreshExpiresIn
-* register(username: String, password: String, email: String): User 
+* **tokenAuth(username: String, password: String): token, payload, refreshExpiresIn**
+* **register(username: String, password: String, email: String): User** 
 * createPost(group_id: ID, title: String, body: String, target_matches: Int): Post  
 * editPost(...inners of create_post): Post 
 * deletePost(post_id: ID): Post 

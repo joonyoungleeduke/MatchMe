@@ -58,14 +58,45 @@ class UserInfoTest(JSONWebTokenTestCase):
   
   user_info = shared.get_test_user_info()
   
-  def setUp(self):
-    self.user = get_user_model().objects.create(username=self.user_info['username'], email=self.user_info['email'])
+  def authenticate(self):
+    self.user = shared.create_user(self.user_info)
     self.client.authenticate(self.user)
   
   def test_query_single_user_with_perm(self):
+    self.authenticate()
     resp = user_requ.get_user_info(self.client, self.user_info)
     userInfoObj = resp['userInfo']
     profileObj = userInfoObj['profile']
     userObj = profileObj['owner']
     res_username, res_email = userObj['username'], userObj['email']
     self.assertEqual([self.user_info['username'], self.user_info['email']], [res_username, res_email])
+    
+  @shared.trueIfException
+  def test_query_single_user_no_perm(self):
+    resp = user_requ.get_user_info(self.client, self.user_info)
+  
+  def test_query_all_users_with_perm(self):
+    self.authenticate()
+    test_users = shared.create_test_users()
+    resp = user_requ.get_users_info(self.client)
+    usersInfo = resp['usersInfo']
+    success = self.validate_users_info(self.user, test_users, usersInfo)
+    self.assertTrue(success)
+    
+  def test_query_all_users_no_perm(self):
+    test_users = shared.create_test_users()
+    resp = user_requ.get_users_info(self.client)
+  
+  def validate_users_info(self, owner, created_users, received_users):
+    received_usernames = [received_user['username'] for received_user in received_users]
+    received_emails = [received_user['email'] for received_user in received_users]
+    owner_username = owner.username 
+    owner_email = owner.email 
+    for created_user in created_users:
+      c_username = created_user.username
+      c_email = created_user.email
+      not_owner = c_username != owner_username or c_email != owner_email
+      not_received = not (c_username in received_usernames and c_email in received_emails)
+      if not_owner and not_received:
+        return False 
+    return True 
