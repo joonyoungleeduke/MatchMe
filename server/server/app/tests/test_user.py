@@ -56,12 +56,8 @@ class UserLoginTest(GraphQLTestCase, registration.RegistrationTestMixin,
     del user_info_copy[attr]
     self.login_verify_and_get_info(self, user_info_copy)
     
-class UserInfoTest(JSONWebTokenTestCase, shared.UsersTestMixin,
-                    user_requ.UserRequTestMixin, shared.VerificationTestMixin):
-    
-  def authenticate(self):
-    self.user = self.create_user(self.user_info)
-    self.client.authenticate(self.user)
+class UserInfoTest(shared.UsersTestMixin, user_requ.UserRequTestMixin, 
+                    shared.VerificationTestMixin, shared.JWTAuthMixin):
   
   def test_query_single_user_with_perm(self):
     self.authenticate()

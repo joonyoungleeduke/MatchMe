@@ -1,6 +1,7 @@
 from functools import wraps 
 from django.contrib.auth import get_user_model 
-import json 
+import json  
+from graphql_jwt.testcases import JSONWebTokenTestCase
 
 class ExceptionsTestUtils:
   
@@ -72,3 +73,10 @@ class UsersTestMixin:
       users.append(user)
     
     return users  
+  
+class JWTAuthMixin(UsersTestMixin, JSONWebTokenTestCase):
+  
+  def authenticate(self):
+    self.user = self.create_user(self.user_info)
+    self.client.authenticate(self.user)
+    return self.user 
