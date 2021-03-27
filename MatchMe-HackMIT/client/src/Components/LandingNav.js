@@ -92,11 +92,6 @@ async function getSearchResults() {
   source = results; 
 }
 
-
-
-
-
-
 const LandingNav = (props) => {
   const classes = useStyles();
   // const [source, setSource] = React.useState([]);
@@ -190,7 +185,7 @@ const LandingNav = (props) => {
     <div>
     <Navbar bg="primary" variant="dark" fixed="top"
     >
- 
+
     <div class="mx-auto" style={{display: "flex", justifyContent:"center", paddingTop: 10}}>
         <div style={{paddingTop: 10}}>
             <FaHandsHelping size={30} color="white"/>

@@ -209,7 +209,6 @@ const NavBar = (props) => {
     handleGroupPost(state);
   }
 
-
   React.useEffect(() => {
     // let result = getSearchResults(); 
     // result.then((result) => {

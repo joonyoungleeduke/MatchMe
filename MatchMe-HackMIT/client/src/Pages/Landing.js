@@ -127,11 +127,7 @@ const Landing = (props) => {
                 <Container textAlign = "center">
                     <Header as='h1' style={{ fontSize: '3em' }}>
                         We Empower Each Other
-                        {/* Change the world with confidence.  */}
                     </Header>
-                    {/* <em style={{ fontSize: '1.3em'}}>
-                        "Alone, we can do so little; together, we can do so much."
-                    </em>  */}
                     <p style={{ fontSize: '1.2em'}}>
                         "Alone we can do so little. Together we can do so much."
                     </p>
@@ -140,8 +136,9 @@ const Landing = (props) => {
                     <Step.Group items={steps}/>
 
                 </Container>
-                {/* <div className="row" style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}> */}
+
                 <img src={require("../Images/pp1.png")} style={{width: 360, position: "absolute",  left: 55, top: 270}}/>
+                
                 <Modal
                 onClose={() => setOpenLogin(false)}
                 onOpen={() => setOpenLogin(true)}
@@ -168,7 +165,6 @@ const Landing = (props) => {
 
                     </Modal.Content>
                 </Modal>
-
 
                 <Modal
                 onClose={() => setOpenRegister(false)}
@@ -309,7 +305,6 @@ const Landing = (props) => {
 
 
                 <img src={require("../Images/pp2.png")} style={{width: 360, position: "absolute",  right: 55, top: 270}}/>
-                {/* </div> */}
             
                 <Container textAlign="center" style={{marginTop: 40}}>
                     <Header as='h1' style={{fontSize: '2em'}}>
