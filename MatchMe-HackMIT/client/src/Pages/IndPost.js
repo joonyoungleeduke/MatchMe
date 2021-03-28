@@ -169,14 +169,14 @@ const IndPost = (props) => {
                                                 Here's what I did.
                                             </h2>
                                             <h5>
-                                                {post.content}
+                                                {post.title}
                                             </h5>
                                             <br></br>
                                             <h3 style={{fontWeight: "bold"}}>
                                                 Why should you care?
                                             </h3>
                                             <p>
-                                                {post.reason}
+                                                {post.description}
                                             </p>
                                 </Container>
                                 <Container text style={{display: showComments ? "" : "none", margin: "20px"}}>

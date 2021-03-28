@@ -212,14 +212,6 @@ const NavBar = (props) => {
           New Group
           </Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/feed">
-          <Nav.Link >
-            <div style={{ textAlign: "center", marginBottom: 2}}>
-              <BiPaperPlane size={25}/>
-            </div>
-            Message
-          </Nav.Link>
-        </LinkContainer>
         <LinkContainer to="/profile" >
         <Nav.Link>
             <div style={{ textAlign: "center", marginBottom: 2}}>

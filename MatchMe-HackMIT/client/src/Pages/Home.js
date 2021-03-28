@@ -42,6 +42,13 @@ const Home = (props) => {
   const [posts, setPosts] = useState([]);
   const [explorePosts, setExplorePosts] = useState([]);
 
+  useEffect(() => {
+    console.log("POSTS: ");
+    console.log(posts);
+    console.log("EXPLORE POSTS: ");
+    console.log(explorePosts);
+  }, [posts, explorePosts])
+
   const [state, handlePost] = React.useReducer(postReducer, {
     showpost: false, 
     dimmer: undefined,
@@ -131,38 +138,39 @@ const Home = (props) => {
 
           <Grid centered>
             <Grid.Row>
-                <Grid.Column width={3} >
-                  <LinkContainer to="/profile">
+
+              <Grid.Column width={3}>
+                <LinkContainer to="/profile">
                   <Nav.Link >
-                      <ProfileCard className="profCard" name={user.first_name + " " + user.last_name} src={profile.image ? profile.image : "../Images/default.png"} 
-                      inspired={profile.total_matches} matched={profile.ind_matches} 
-                      groups={groups} />
-                      </Nav.Link>
-                    </LinkContainer>
+                      <ProfileCard 
+                          className="profCard" 
+                          name={user.first_name + " " + user.last_name} 
+                          src={profile.image ? profile.image : "../Images/default.png"} 
+                          inspired={profile.total_matches} matched={profile.ind_matches} 
+                          groups={groups} 
+                        />
+                  </Nav.Link>
+                </LinkContainer>
 
-                    <GroupsCard header="Your Groups" name={props.name} src={props.src} inspired={props.inspired} matched={props.matched} groups={groups} img={profile.image}/>
+                <GroupsCard header="Your Groups" name={props.name} src={props.src} inspired={props.inspired} matched={props.matched} groups={groups} img={profile.image}/>
 
-                </Grid.Column>
-
-
-
-                  <Grid.Column centered width={5}>
-
-                    <NewPost name = {user.first_name + " " + user.last_name} profile = {profile} match_state = {match_state} state={ state } handlePostChange={handlePostChange} handleMatchPostChange={handleMatchPostChange} />
-
-                    <Posts posts={explore ? explorePosts : explorePosts} curr_user={user.id} updatePosts={updatePosts} img={profile.image} />
-
-                  </Grid.Column>
-
-                  <Grid.Column width={3}>
-
-                    <SuggestedGroups groups={suggestions} img={profile.image}/>
+              </Grid.Column>
 
 
 
-                  </Grid.Column>
+              <Grid.Column centered width={5}>
 
-              </Grid.Row>
+                <NewPost name = {user.first_name + " " + user.last_name} profile = {profile} match_state = {match_state} state={ state } handlePostChange={handlePostChange} handleMatchPostChange={handleMatchPostChange} />
+
+                <Posts posts={posts} curr_user={user.id} updatePosts={updatePosts} img={profile.image} />
+
+              </Grid.Column>
+
+              <Grid.Column width={3}>
+                <SuggestedGroups groups={suggestions} img={profile.image}/>
+              </Grid.Column>
+
+            </Grid.Row>
 
           </Grid>
 

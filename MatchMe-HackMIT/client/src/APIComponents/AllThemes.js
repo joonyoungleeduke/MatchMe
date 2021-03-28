@@ -16,6 +16,3 @@ async function AllThemes() {
 
 
 export default AllThemes;
-
-
-// path('groups/', groups_list, name='groups-list'),

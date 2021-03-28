@@ -19,8 +19,8 @@ class UserHeart(models.Model):
 
 class Post(models.Model): # post -- regular or match by isMatch boolean 
 
-    content = models.TextField(blank=False, default='') # action
-    reason = models.TextField(blank=True, default='') # reason for caring 
+    title = models.TextField(blank=False, default='') # action
+    description = models.TextField(blank=True, default='') # reason for caring 
 
     hearts = models.ManyToManyField(User, blank=True, through=UserHeart, related_name='heart_user')
 

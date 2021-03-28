@@ -13,8 +13,9 @@ const NewPost = (props) => {
 
     const[options, setOptions] = useState([]);
     const[form, setForm] = useState({
-        group: null,
-        content: "",
+        group: "",
+        title: "",
+        description: ""
     });
     const [match_form, setMatchForm] = useState({
         group: null, 
@@ -33,7 +34,7 @@ const NewPost = (props) => {
 
         var options_arr = new Array();  
 
-        for (let idx in groups) { // this code makes no sense! :) but it works...
+        for (let idx in groups) { 
             options_arr.push({
                 text: groups[idx].name, 
                 value: groups[idx].id,
@@ -62,7 +63,8 @@ const NewPost = (props) => {
         try {
             const response = await axiosInstance.post('api/posts/create/', {
                 group: form.group,
-                content: form.content,
+                title: form.title,
+                description: form.description,
             });
 
             if (response.status === 200) {
@@ -101,17 +103,25 @@ const NewPost = (props) => {
         }
     }
 
-    const handleChange = (e, { value })  => {
-        const obj = {...match_form};
-        obj.content = value; 
-        setForm(obj); 
+    const handleTitleChange = (e, { value })  => {
+        setForm({
+            ...form,
+            title: value,
+        })
     }
 
-    const handleSelectChange = (e, { value }) => {
-        const obj = {...form};
-        obj.group = value; 
-        console.log(obj);
-        setForm(obj);
+    const handleDescChange = (e, {value}) => {
+        setForm({
+            ...form,
+            description: value,
+        })
+    }
+
+    const handleGroupSelectChange = (e, { value }) => {
+        setForm({
+            ...form,
+            group: value,
+        })
     }
 
 
@@ -221,18 +231,18 @@ const NewPost = (props) => {
                                     name='group'
                                     options={options}
                                     placeholder='What group do you want to share to?'
-                                    onChange = {handleSelectChange}
+                                    onChange = {handleGroupSelectChange}
                                 />
                             </Form.Group>
 
-                            <Form.Field control={Input} required name='content'  placeholder="What is the quick version?" onChange = {handleChange}/>
+                            <Form.Field control={Input} required name='title'  placeholder="What is the quick version?" onChange = {handleTitleChange}/>
 
                             <Form.Field 
                                 required 
                                 control={TextArea}
-                                name='reason'
+                                name='description'
                                 placeholder='Tell us more.'
-                                onChange = {handleChange}
+                                onChange = {handleDescChange}
                             />
 
                         </Form>

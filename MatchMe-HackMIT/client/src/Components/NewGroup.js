@@ -5,7 +5,7 @@ import AllThemes from "../APIComponents/AllThemes";
 
 const NewGroup = (props) => {
     const[form, setForm] = useState({
-        theme: 'null',
+        theme: '',
         name: "",
         description: '',
     });
@@ -14,6 +14,7 @@ const NewGroup = (props) => {
 
     async function getThemes() {
         let results = await AllThemes(); 
+        console.log(results);
         let result = setThemes(results);
         result.then((data) => {
             setAllThemes(data); 
@@ -23,10 +24,19 @@ const NewGroup = (props) => {
     async function setThemes(results) {
         let arr = Array(); 
         for (let idx in results) {
-            arr.push(results[idx]);
+            const val = results[idx];
+            arr.push({
+                key: idx,
+                value: val,
+                text: val
+            });
         }
         return arr; 
     }
+
+    useEffect(() => { 
+        console.log(form);
+    }, [form])
 
     useEffect(() => {
         getThemes();
@@ -53,17 +63,25 @@ const NewGroup = (props) => {
         }
     };
 
-    const handleChange = (e, { value })  => {
-        const obj = {...form};
-        obj.content = value; 
-        setForm(obj); 
+    const handleSelectChange = (e, { value }) => {
+        setForm({
+            ...form,
+            theme: value,
+        })
     }
 
-    const handleSelectChange = (e, { value }) => {
-        const obj = {...form};
-        obj.group = value; 
-        console.log(obj);
-        setForm(obj);
+    const handleNameChange = (e, { value })  => {
+        setForm({
+            ...form,
+            name: value,
+        }) 
+    }
+
+    const handleDescChange = (e, { value })  => {
+        setForm({
+            ...form,
+            description: value,
+        }) 
     }
 
     return (
@@ -73,7 +91,6 @@ const NewGroup = (props) => {
                 </Header>
                 <Form onSubmit={(e) => handleSubmit(e)} id="new-group-form">
                     <Form.Group widths='equal'>
-                        {console.log(all_themes)}
                         <Form.Select
                             required 
                             fluid 
@@ -84,17 +101,19 @@ const NewGroup = (props) => {
                         />
                     </Form.Group>
 
-                    <Form.Field control={Input} required name='name'  placeholder="What is your group's name?" onChange = {handleChange}/>
+                    <Form.Field control={Input} required name='name'  placeholder="What is your group's name?" onChange = {handleNameChange}/>
 
                     <Form.Field 
                         required 
                         control={TextArea}
                         name='description'
                         placeholder='What is your group about?'
-                        onChange = {handleChange}
+                        onChange = {handleDescChange}
                     />
 
-                    <Button positive type="submit" value="submit" form="new-group-form">Create</Button>
+                    <Button positive type="submit" value="submit" form="new-group-form">
+                        Create
+                    </Button>
                 </Form>
         </div>
     );

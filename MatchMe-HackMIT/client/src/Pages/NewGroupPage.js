@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ThemePosts from "../APIComponents/ThemePosts";
 import NavBar from "../Components/NavBar";
 import {Grid, Container, Header, Image, Label, Menu, Progress, Form, Button, Divider} from "semantic-ui-react";
 import NewGroup from "../Components/NewGroup";

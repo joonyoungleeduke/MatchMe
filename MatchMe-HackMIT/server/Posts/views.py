@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings 
 from Profiles.models import Profile 
 import Groups.views 
 from Posts.models import Post, Comment, UserHeart, UserMatch 
@@ -10,17 +11,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status 
 from shared import permissions as shared_perms 
-
-
-# class HeartSerializer(serializers.ModelSerializer):
-#     class Meta: 
-#         model = UserHeart 
-#         fields = ['author', 'post']
-
-# class MatchSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = UserMatch 
-#         fields = ['author', 'match_post']
 
 class MatchViewSet(viewsets.ModelViewSet):
     queryset = UserMatch.objects.all()
@@ -55,8 +45,6 @@ class HeartViewSet(viewsets.ModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer 
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-    #                         IsOwnerOrReadOnly]
     permission_classes = [shared_perms.AnyAuthIfGet]
     
     def create(self, request):
@@ -76,10 +64,7 @@ class PostViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def all_themes(self, request):
         try: 
-            themes = []
-            for group in ActionGroup.objects.all(): 
-                themes.append(group.theme)
-            
+            themes = settings.THEMES
             return Response(themes, status=status.HTTP_200_OK)
 
         except Exception as e: 
@@ -99,9 +84,6 @@ class PostViewSet(viewsets.ModelViewSet):
         except Exception as e: 
             print(e) 
             return Response({}, status=status.HTTP_400_BAD_REQUEST)
-    
-    # def perform_create(self, serializer):
-    #     serializer.save(author=self.request.user)
 
     @action(detail=True, methods=['get'])
     def theme_posts(self, request, theme=None):
@@ -177,10 +159,6 @@ class PostViewSet(viewsets.ModelViewSet):
 
         posts = self.queryset.filter( group__in=groups ).order_by('hearts').distinct()
 
-
-        print("GREATGREAT")
-        print(posts)
-
         serializer = PostSendSerializer(posts, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -190,9 +168,6 @@ class PostViewSet(viewsets.ModelViewSet):
         preferences = self.helper_profile_preferences(pk)
 
         posts = self.queryset.filter( group__theme__in=preferences).order_by('hearts').distinct()
-
-        print("GREATGREAT")
-        print(posts)
         
         serializer = PostSendSerializer(posts, many=True)
 

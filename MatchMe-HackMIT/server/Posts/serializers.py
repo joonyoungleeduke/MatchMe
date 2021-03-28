@@ -49,7 +49,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Post 
-        fields = ['id', 'content', 'group', 'author', 'isMatch', 'goal', 'image', 'link', 'reason']
+        fields = ['id', 'title', 'group', 'author', 'isMatch', 'goal', 'image', 'link', 'description']
 
     def match_post(self, obj):
         return obj.ismatch 
@@ -66,7 +66,7 @@ class PostSerializer(serializers.ModelSerializer):
 class PostSendSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Post
-        fields = ['id', 'content', 'group', 'author', 'hearts', 'matches', 'isMatch', 'goal', 'image', 'link']
+        fields = ['id', 'title', 'group', 'author', 'hearts', 'matches', 'isMatch', 'goal', 'image', 'link']
 
 class CommentSerializer(serializers.ModelSerializer):
 

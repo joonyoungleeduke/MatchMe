@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card, Icon, Grid, List, Form, Button, Image, Modal} from 'semantic-ui-react'
 import {BsFillLightningFill} from "react-icons/bs"
 import {FaHandsHelping} from "react-icons/fa"
@@ -6,8 +6,14 @@ import CreateIcon from '@material-ui/icons/Create';
 import IconButton from '@material-ui/core/IconButton'
 
 const BigProfileCard = (props) => {
+
+    const [open, setOpen] = useState(false);
+
     return(
         <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          onOpen={() => setOpen(true)}
           trigger={ 
                     <Card style={{textDecoration: "none"}}>
                           <Image src={props.src} wrapped ui={false}/>
@@ -69,7 +75,7 @@ const BigProfileCard = (props) => {
             </Modal.Content>
 
             <Modal.Actions>
-                    <Button color="black" >Close</Button>
+                    <Button color="black" onClick={() => setOpen(false)}>Close</Button>
                     <Button positive type="submit" value="submit" form="new-post-form">Confirm</Button>
             </Modal.Actions>
 

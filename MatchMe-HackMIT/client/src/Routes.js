@@ -5,7 +5,6 @@ import Profile from "./Pages/Profile"
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Posts from "./Components/Posts";
-import NewPost from "./Components/NewPost";
 import Landing from "./Pages/Landing";
 import IndPost from "./Pages/IndPost";
 import GroupPage from "./Pages/GroupPage";

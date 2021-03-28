@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 POST_ACTIONS = ['heart', 'unheart', 'match', 'unmatch']
 GROUP_ACTIONS = ['join', 'leave']
-
+THEMES = ['Charity', 'Social Justice', 'Global Health', 'Disability Awareness', 'LGBTQ+ Rights', 'Environment', 'Political Advocacy', 'Income Inequality', 'Elderly Aid', 'Human Rights']
 
 # Application definition
 
