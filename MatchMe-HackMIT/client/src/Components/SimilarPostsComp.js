@@ -3,10 +3,9 @@ import { Card, Icon, Grid, Image, List} from 'semantic-ui-react'
 import LabelWIm from "./LabelWIm";
 import {BsFillLightningFill} from "react-icons/bs"
 import {FaHandsHelping} from "react-icons/fa"
-import {Link} from "react-router-dom";
-
 
 const SimilarPostsComp = (props) => {
+
     return(
         <Card>
             <Card.Content header='Similar Posts' />
@@ -14,7 +13,7 @@ const SimilarPostsComp = (props) => {
             <List.Content>
             <List selection vertical>
                     {props.posts.map(post => (
-                    <List.Item as={Link} to={"/post/" + post.id.toString()}>
+                    <List.Item as="a" href={"/post/" + post.id.toString()}>
                         <Image avatar src={post.profile.image}/>
                         <List.Content>
                         <List.Header>

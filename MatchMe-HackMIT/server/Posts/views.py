@@ -107,7 +107,7 @@ class PostViewSet(viewsets.ModelViewSet):
         try: 
 
             theme = ActionGroup.objects.all().filter(pk=pk).first().theme 
-            posts = Post.objects.all().filter( group__theme = theme).distinct().exclude( id=post_id ).exclude( author=request.user.id )
+            posts = Post.objects.all().filter( group__theme = theme).filter(isMatch = True).distinct().exclude( id=post_id ).exclude( author=request.user.id )
 
             serializer = PostSendSerializer(posts, many=True)
 
