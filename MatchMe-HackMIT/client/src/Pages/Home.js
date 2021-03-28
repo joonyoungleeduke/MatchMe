@@ -91,23 +91,6 @@ const Home = (props) => {
     setExplore(!explore);
   }
 
-  // async function getPosts(user_id) {
-  //   await getGroups(user_id);
-
-  //   let arr = Array(); 
-
-  //   for (let idx in groups) {
-  //     let group = groups[idx];
-
-  //     let data = await GroupPosts(group.id);
-  //     data.then(info => {
-  //       arr.push(info);
-  //     })
-  //   }
-
-  //   setPosts(arr);
-  // }
-
   async function getPosts(user_id, limit) {
     let posts = await SpecificPosts(user_id, limit);
     await ParseAllPosts(posts, setPosts, user_id); 
@@ -167,37 +150,9 @@ const Home = (props) => {
 
                     <NewPost name = {user.first_name + " " + user.last_name} profile = {profile} match_state = {match_state} state={ state } handlePostChange={handlePostChange} handleMatchPostChange={handleMatchPostChange} />
 
-                  {/* <FormControlLabel 
-                    control={
-                      <Switch
-                      checked = {explore}
-                      onChange = {handleToggle}
-                      name="toggle"
-                      color="Primary"
-                    />
-                    }
-                    label="See All"
-                  /> */}
-
-
-                  
-                {/* <Container style={styles.filter}>
-                  <Button toggle active={explore} onClick = {handleToggle}>
-                      Filtering
-                    </Button>
-                </Container> */}
-
-                  {console.log(explorePosts)}
-
-                    {/* <Posts posts={explore ? posts : explorePosts} img={profile.image} /> */}
                     <Posts posts={explore ? explorePosts : explorePosts} curr_user={user.id} updatePosts={updatePosts} img={profile.image} />
 
-                    {/* <FeedCard description={description} likes={8}/> */}
-
-
-
                   </Grid.Column>
-
 
                   <Grid.Column width={3}>
 
@@ -229,11 +184,3 @@ const styles = {
     right: 'auto',
   },
 }
-
-// .modal {
-//   height: auto;
-//   top: auto;
-//   left: auto; 
-//   bottom: auto; 
-//   right: auto;
-// }

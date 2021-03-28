@@ -61,7 +61,6 @@ class Register extends Component{
             if (response2.status === 200) {
                 this.props.func(false);
                 this.props.func1(true);
-                // this.props.history.push("/feed");
             }
             return response2;
         } catch (error) {

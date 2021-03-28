@@ -1,13 +1,11 @@
-import React, {Component, useState} from 'react'
-import {Navbar, Button, Nav,} from 'react-bootstrap';
+import React, {useState} from 'react'
+import {Navbar, Nav,} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
-import { Icon, Search} from 'semantic-ui-react'
 import {BiPaperPlane} from "react-icons/bi"
 import {FaUserAlt} from "react-icons/fa"
 import {TiHome} from "react-icons/ti"
 import {FaHandsHelping} from "react-icons/fa"
 import axiosInstance from "../User/axiosApi";
-import SearchResults from "../APIComponents/SearchResults";
 import _ from "lodash";
 import DropDown from "./DropDown";
 import InputBase from '@material-ui/core/InputBase';
@@ -15,13 +13,6 @@ import SearchIcon from '@material-ui/icons/Search'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import AllGroups from "../APIComponents/AllGroups";
 import AllThemes from "../APIComponents/AllThemes";
-import NewGroup from "../Components/NewGroup";
-
-const initialState = {
-  loading: false, 
-  results: [], 
-  value: '',
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -244,8 +235,5 @@ const NavBar = (props) => {
   )
 
 }
-
-
-{/* <button onClick={this.handleLogout}>Logout</button> */}
 
 export default NavBar;

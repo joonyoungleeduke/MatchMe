@@ -35,17 +35,17 @@ const IndPost = (props) => {
         let user = UserInfo(user_id);
     
         user.then(data => {
-          setUser(data);
+            setUser(data);
         })
-      };
+    };
     
-      async function getProfile(user_id) {
+    async function getProfile(user_id) {
         let profile = ProfileInfo(user_id);
     
         profile.then(data => {
-          setProfile(data);
+            setProfile(data);
         })
-      }
+    }
 
     async function handleCreateMatch() {
         let response = await SubmitMatch({
@@ -78,10 +78,10 @@ const IndPost = (props) => {
     async function getSuggestions(user_id) {
         let suggestions = GroupSuggestions(user_id);
         suggestions.then(data => {
-          setSuggestions(data);
+            setSuggestions(data);
         })
     
-      }
+    }
     
 
 
@@ -194,9 +194,6 @@ const IndPost = (props) => {
                             </h5>
                             <br></br>
                             <Progress percent={((post.matches / post.goal) * 100).toFixed(3)} color="blue"/>
-                            {/* <h5 style={{fontWeight: 'bold'}}>
-                                Help get to {post.goal}.
-                            </h5> */}
                             <br></br>
                             {post.matched ? 
 
@@ -227,7 +224,7 @@ const IndPost = (props) => {
                                 </Form>
                         }
 
-     
+    
                         </Grid.Column>
                     </Grid.Row>
 
@@ -266,21 +263,3 @@ const IndPost = (props) => {
 }
 
 export default IndPost;
-
-{/* <Card.Content extra>
-<List horizontal selection>
-<Popup content='Like' basic trigger={
-    <List.Item
-        onClick={handleHeart}
-    >
-
-        <List.Icon 
-        name={hearted ? "heart" : "heart outline"}
-        size="large"
-        label={{as: 'a', corner: 'left', value: props.post.hearts}}
-        >
-
-        </List.Icon>
-
-    </List.Item>
-} /> */}

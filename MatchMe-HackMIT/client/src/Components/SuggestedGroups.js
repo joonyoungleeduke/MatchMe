@@ -12,56 +12,22 @@ const SuggestedGroups = (props) => {
             <Card.Content header='Suggested Groups' />
             <Card.Content extra>
             <List.Content>
-           <List selection vertical>
-                 {props.groups.map(group => (
-                   <List.Item as={Link} to={"/group/" + group.id.toString()}>
-                     <Image avatar src={group.image}/>
-                     <List.Content>
-                       <List.Header>
-                         {group.name}
-                       </List.Header>
-                     </List.Content>
-                   </List.Item>
-                 ))}
-             </List>
-         </List.Content>
+            <List selection vertical>
+                  {props.groups.map(group => (
+                    <List.Item as={Link} to={"/group/" + group.id.toString()}>
+                      <Image avatar src={group.image}/>
+                      <List.Content>
+                        <List.Header>
+                          {group.name}
+                        </List.Header>
+                      </List.Content>
+                    </List.Item>
+                  ))}
+              </List>
+          </List.Content>
             </Card.Content>
         </Card>
     );
 }
 
 export default SuggestedGroups;
-
-
-// const GroupsCard = (props) => {
-//     return(
-//         <Card>
-//             <Card.Content>
-//             <Card.Header>{props.header}</Card.Header>
-//             </Card.Content>
-//       <Card.Content extra>
-//         <List.Content>
-//           <List selection vertical>
-//                 {props.groups.map(group => (
-//                   <List.Item as={Link} to={"/group/" + group.id.toString()}>
-//                     <Image avatar src={group.image}/>
-//                     <List.Content>
-//                       <List.Header>
-//                         {group.name}
-//                       </List.Header>
-//                     </List.Content>
-//                   </List.Item>
-//                 ))};
-//             </List>
-//         </List.Content>
-//       </Card.Content>
-//   </Card>
-//   );
-// }
-
-// export default GroupsCard;
-
-
-// // <List.Item as={Link} to={"/post/" + props.post.id.toString()} post={props.post} style={{textDecoration: "none"}}>
-// // <List.Icon name='handshake outline' size='large' />
-// // </List.Item>

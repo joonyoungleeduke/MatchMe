@@ -9,8 +9,6 @@ import ParsePosts from "../APIComponents/ParsePosts";
 import Posts from "../Components/Posts";
 import InterestCard from "../Components/InterestCard";
 import axiosInstance from "../User/axiosApi";
-// import { browserHistory, useHistory} from 'react-router'
-
 
 const steps = [
     {
@@ -88,35 +86,6 @@ const Landing = (props) => {
         }
     }
 
-    // const handleSubmit = event => {
-    //     event.preventDefault();
-    //     try {
-    //         const response = await axiosInstance.post('api/auth/token/obtain/', {
-    //             username: username,
-    //             password: password
-    //         });
-
-    //         axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
-
-
-    //         const response2 = await axiosInstance.get('api/auth/user/id/');
-
-    //         localStorage.setItem('user_id', response2.data);
-
-    //         if (response2.status === 200) {
-    //             this.props.func(false);
-    //             this.props.func1(true);
-    //             // this.props.history.push("/feed");
-    //         }
-    //         return response2;
-    //     } catch (error) {
-    //         console.log(error.stack);
-    //         this.setState({
-    //             errors:error.response.data
-    //         });
-    //     }
-    // }
-
     return (
         <Container>
             
@@ -183,66 +152,6 @@ const Landing = (props) => {
 
                 </Modal>
 
-{/* submit profile component --- data.{bio, preference1, pref... ... , image} */}
-
-
-
-{/* <Modal 
-                closeOnDimmerClick={false}
-                onClose={() => setOpenEditProfile(false)}
-                onOpen={() => setOpenEditProfile(true)}
-                open={openEditProfile}
-                trigger={
-                    <Modal.Header>Edit Profile</Modal.Header>
-            <Modal.Content>
-                <Grid>
-                    <Grid.Column width={7} style={{marginRight: 80}}>    
-                        <List verticalAlign="middle">
-                            <List.Item>
-                                <Image className="emptyimg" src={require("../Images/default.png")} style={{width: 200, marginLeft: 115, marginBottom: 30, borderRadius: "20px"}}/>
-                                
-                                <div class="custom-file" style={{ marginLeft: 40}}>
-
-                                {/* require("../Images/emptyprofile.png") */}
-{/*                                 
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01" onChange={() => {handleImageChange()}}/>
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
-                                </div>
-                            </List.Item>
-                        </List>
-                        </Grid.Column>
-                        <Grid.Column width={5}>
-                        <Form > 
-                        {/* onSubmit={(e) => handleSubmit(e)} id="new-post-form" 
-                        <Form.Field>
-                            <label>First Name</label>
-                            <input placeholder={props.first_name} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Last Name</label>
-                            <input placeholder={props.last_name} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Bio</label>
-                            <Form.TextArea placeholder={props.bio} />
-                        </Form.Field>
-                            {/* onChange = {(e) => handleChange(e)} 
-                        </Form>
-                        </Grid.Column>
-                        
-
-                </Grid>
-                    </Modal.Content>
-                    <Modal.Actions>
-                        <Button positive type="submit" value="submit" form="new-post-form">
-                            Next <Icon name='chevron right' />
-                        </Button>
-                            {/* onClick={() => props.handlePostChange({type: 'CLOSE_MODAL' })} 
-                    </Modal.Actions>
-
-                </Modal>
-
-*/}
                 <Modal 
                     closeOnDimmerClick={false}
                     onClose={() => {setOpenInterests(false)}}

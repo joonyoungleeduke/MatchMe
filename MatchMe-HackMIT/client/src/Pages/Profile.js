@@ -13,23 +13,6 @@ import FeedCard from "../Components/FeedCard";
 import BigProfileCard from "../Components/BigProfileCard";
 import GroupsCard from "../Components/GroupsCard";
 
-// actions inspired, actions matched 
-// image 
-// groups -> group images
-// user posts / comments  
-
-// function postReducer(state, action) {
-//   switch (action.type) {
-//     case 'OPEN_MODAL' :
-//       return { showpost: true, dimmer: action.dimmer }
-//     case 'CLOSE_MODAL' : 
-//       return { showpost: false }
-//     default: 
-//       throw new Error(); 
-//   }
-// }
-
-
 class Profile extends Component {
   constructor() {
     super();
@@ -45,17 +28,8 @@ class Profile extends Component {
 
   componentDidMount() {
     const user_id = localStorage.getItem('user_id');
-    // const state = React.useReducer(postReducer, {
-    //   showpost: false, 
-    //   dimmer: undefined,
-    // });
-    // const match_state = React.useReducer(postReducer, {
-    //   showpost: false, 
-    //   dimmer: undefined, 
-    // });
-
     this.setPosts(user_id);
-    this.setUser(user_id); // can likely replace some of these with functional progr. // no time 
+    this.setUser(user_id); 
     this.setGroups(user_id);
     this.setProfile(user_id); 
     this.setComments(user_id);
@@ -150,13 +124,6 @@ class Profile extends Component {
                     {this.state.posts.map(post => (
                         <FeedCard isMatch={post.isMatch} post={post} img={this.state.profile.image} />
                     ))}
-                     {/* {this.state.comments.map(comment => (
-                    <div>
-                      <h1>COMMENT</h1>
-                      {comment.content}
-                      {comment.post.author.first_name}
-                    </div>
-                    ))} */}
                 </div>
                 </Grid.Column>
 
@@ -164,14 +131,14 @@ class Profile extends Component {
               <BigProfileCard className="profCard" first_name={this.state.user.first_name} last_name={this.state.user.last_name} src={this.state.profile.image} 
               inspired={this.state.profile.total_matches} matched={this.state.profile.ind_matches} 
               groups={this.state.groups} bio={this.state.profile.bio}/>
-                 
+                
                   <GroupsCard header="Groups" groups={this.state.groups} img={this.state.profile.image} />
                 </Grid.Column>
 
             </Grid.Row>
 
         </Grid>
-       
+    
       </div>
 
     );

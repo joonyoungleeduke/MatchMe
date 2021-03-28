@@ -60,12 +60,10 @@ axiosInstance.interceptors.response.use(
                     console.log("Refresh token not available.")
                     window.location.href = '/login/';
                 }
-        }
-      
-     
-      // specific error handling done elsewhere
-      return Promise.reject(error);
-  }
+            }
+
+        return Promise.reject(error);
+    }
 );
 
 export default axiosInstance

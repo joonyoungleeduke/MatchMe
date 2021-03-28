@@ -4,9 +4,7 @@ import Home from "./Pages/Home";
 import Profile from "./Pages/Profile"
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import Hello from "./User/Hello";
 import Posts from "./Components/Posts";
-// import TestFeed from "./Pages/TestFeed";
 import NewPost from "./Components/NewPost";
 import Landing from "./Pages/Landing";
 import IndPost from "./Pages/IndPost";

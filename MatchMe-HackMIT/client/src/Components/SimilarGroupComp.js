@@ -11,20 +11,20 @@ const SimilarGroupComp = (props) => {
         <Card style={props.style}>
             <Card.Content header='Groups Like Us' />
             <Card.Content extra>
-            <List.Content>
-           <List selection vertical>
-                 {props.groups.map(group => (
-                   <List.Item as={Link} to={"/group/" + group.id.toString()}>
-                     <Image avatar src={group.image}/>
-                     <List.Content>
-                       <List.Header>
-                         {group.name}
-                       </List.Header>
-                     </List.Content>
-                   </List.Item>
-                 ))}
-             </List>
-         </List.Content>
+          <List.Content>
+            <List selection vertical>
+                {props.groups.map(group => (
+                  <List.Item as={Link} to={"/group/" + group.id.toString()}>
+                    <Image avatar src={group.image}/>
+                    <List.Content>
+                      <List.Header>
+                        {group.name}
+                      </List.Header>
+                    </List.Content>
+                  </List.Item>
+                ))}
+            </List>
+          </List.Content>
             </Card.Content>
         </Card>
     );

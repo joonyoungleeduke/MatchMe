@@ -14,9 +14,7 @@ function Posts(props) {
         <div style={{ width: "100%", marginTop: 20}}>
             {
                 props.posts && 
-                props.posts.map(post => (
-                    // <FeedCard isMatch={post.isMatch} post={post} img={props.img}/>
-                    
+                props.posts.map(post => (                    
                     <FeedCard isMatch={post.isMatch} post={post}/>
 
             ))}

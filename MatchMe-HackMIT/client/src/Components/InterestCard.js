@@ -8,7 +8,7 @@ const InterestCard = (props) => {
         <div className="col interest" onClick={() => {setSelect(!select)}} style={{textAlign: "center", backgroundColor: select ? "lightgray" : "none"}} >
             {props.name}
             <img src={props.src} style={{width: 110, borderRadius: "5%", marginTop: 5}} />
-    </div>
+        </div>
     );
 }
 export default InterestCard;

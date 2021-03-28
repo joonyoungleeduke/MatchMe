@@ -11,8 +11,6 @@ import Grid from "@material-ui/core/Grid";
 
 const NewPost = (props) => {
 
-    let history = useHistory();
-
     const[options, setOptions] = useState([]);
     const[form, setForm] = useState({
         group: null,
@@ -25,13 +23,6 @@ const NewPost = (props) => {
         goal: 10, 
     })
 
-
-    // fields = ['id', 'content', 'group', 'author']
-    // optional_fields = ['hearts', 'matches', 'isMatch', 'goal']
-
-
-
-
     useEffect(() => {
         parseOptions()
     }, []);   
@@ -43,7 +34,6 @@ const NewPost = (props) => {
         var options_arr = new Array();  
 
         for (let idx in groups) { // this code makes no sense! :) but it works...
-            // console.log(group);
             options_arr.push({
                 text: groups[idx].name, 
                 value: groups[idx].id,
@@ -76,7 +66,6 @@ const NewPost = (props) => {
             });
 
             if (response.status === 200) {
-                // history.push('/');
                 props.handlePostChange({type: 'CLOSE_MODAL'})
             }
 
@@ -157,22 +146,6 @@ const NewPost = (props) => {
         handleGoalChange('', event.target.value === '' ? '' : Number(event.target.value));
     }
 
-
-//     <div class="ui middle aligned selection list">
-//     {props.groups.map(group => (
-//       <div class="item">
-//         <img class="ui avatar image" src={group.image}/>
-//         <div class="content">
-//     <div class="header">{group.name}</div>
-//         </div>
-//       </div>
-//     ))}
-//   </div>
-
-{/* <Profile src={require("./Images/man.png")} username="Joon Young Treet" inspired={33} matched={40} groups={groups}/> */}
-
-
-
     return (
         <div>
             <Card style={styles.card} >
@@ -219,10 +192,6 @@ const NewPost = (props) => {
                     </List.Item>
                 } />
                 </List>
-
-                {/* <a style={{color:"gray", marginTop: "auto", marginBottom: "auto", marginLeft: 30}}><FiLink size={30} className="attachButton"/></a>
-                <a style={{color:"gray", marginTop: "auto", marginBottom: "auto", marginLeft: 18}}><AiFillPicture size={35} className="attachButton"/></a>
-                <a style={{color:"gray", marginTop: "auto", marginBottom: "auto", marginLeft: 18}}><BsFillCameraVideoFill size={30} className="attachButton"  /></a> */}
             </Card>
 
             <Transition visible={props.state.showpost} animation='scale' duration={500}>
@@ -252,7 +221,6 @@ const NewPost = (props) => {
                                     name='group'
                                     options={options}
                                     placeholder='What group do you want to share to?'
-                                    // value = {form.group}
                                     onChange = {handleSelectChange}
                                 />
                             </Form.Group>
@@ -301,11 +269,9 @@ const NewPost = (props) => {
                             <Form.Group widths='equal'>
                                 <Form.Select
                                     fluid 
-                                    // label='Group'
                                     name='group'
                                     options={options}
                                     placeholder='What group did you want to share to?'
-                                    // value = {form.group}
                                     onChange = {handleMatchSelectChange}
                                 />
                             </Form.Group>

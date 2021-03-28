@@ -15,12 +15,12 @@ const ProfileCard = (props) => {
           
           <Card.Description>
             <BsFillLightningFill size={18} style={{top: -10, marginRight: 7}}/>
-            Inspired: {props.inspired} 
+              Inspired: {props.inspired} 
           </Card.Description>
 
           <Card.Description>
               <FaHandsHelping size={18} style={{top: -10, marginRight: 7}}/>
-               Matched: {props.matched} 
+                Matched: {props.matched} 
           </Card.Description>
         </Card.Content>
       </Card>

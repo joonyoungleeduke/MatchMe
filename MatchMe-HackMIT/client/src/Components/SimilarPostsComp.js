@@ -12,22 +12,22 @@ const SimilarPostsComp = (props) => {
             <Card.Content header='Similar Posts' />
             <Card.Content extra>
             <List.Content>
-           <List selection vertical>
-                 {props.posts.map(post => (
-                   <List.Item as={Link} to={"/post/" + post.id.toString()}>
-                     <Image avatar src={post.profile.image}/>
-                     <List.Content>
-                       <List.Header>
-                           {post.author.first_name + " " + post.author.last_name}
-                       </List.Header>
-                       <List.Description>
-                           {"Posted in " + post.group.name}
-                       </List.Description>
-                     </List.Content>
-                   </List.Item>
-                 ))};
-             </List>
-         </List.Content>
+            <List selection vertical>
+                    {props.posts.map(post => (
+                    <List.Item as={Link} to={"/post/" + post.id.toString()}>
+                        <Image avatar src={post.profile.image}/>
+                        <List.Content>
+                        <List.Header>
+                            {post.author.first_name + " " + post.author.last_name}
+                        </List.Header>
+                        <List.Description>
+                            {"Posted in " + post.group.name}
+                        </List.Description>
+                        </List.Content>
+                    </List.Item>
+                    ))};
+                </List>
+            </List.Content>
             </Card.Content>
         </Card>
     );

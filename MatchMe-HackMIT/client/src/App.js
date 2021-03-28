@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import React from 'react'
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Routes from "./Routes";
 
 const App = props => {
-  
-  useEffect(() => {
-    document.title = "MatchMe";
-}, []);
 
 return(
     <div>
@@ -17,6 +12,5 @@ return(
     </div>
   );
 };
-
 
 export default App;

@@ -21,73 +21,7 @@ const initialState = {
   value: '',
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white'
-  },
-  inputRoot: {
-    color: 'white',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-
-
-
-function searchReducer(state, action) {
-  switch (action.type) {
-    case "CLEAN_QUERY":
-      return initialState 
-    case "START_SEARCH":
-      return { ...state, loading: true, value: action.query}
-    case "FINISH_SEARCH":
-      return { ...state, loading: false, results: action.results }
-    case "UPDATE_SELECTION":
-      return { ...state, value: action.selection }
-    
-    default: 
-      throw new Error() 
-  }
-}
-
 const LandingNav = (props) => {
-  const classes = useStyles();
-  const [state, setState] = React.useReducer(searchReducer, initialState)
   async function handleLogout() {
     try {
       const response = await axiosInstance.post('logout/', {
@@ -125,19 +59,10 @@ const LandingNav = (props) => {
 
 
   React.useEffect(() => {
-    // let result = getSearchResults(); 
-    // result.then((result) => {
-    //   setSource(result);
-    //   console.log(result);
-    // })
     let data = getGroups();
     data.then((data) => {
       parseOptions(data)
     })
-    // return () => {
-    //   clearTimeout(timeoutRef.current)
-    // }
-
   }, []);
 
   return (
@@ -162,8 +87,5 @@ const LandingNav = (props) => {
   )
 
 }
-
-
-{/* <button onClick={this.handleLogout}>Logout</button> */}
 
 export default LandingNav;

@@ -1,13 +1,9 @@
-import React, {useState} from 'react'
-
-import {Button, Icon, Label, Progress, Card, Image, List, Container, Popup, Header} from 'semantic-ui-react';
-
+import React from 'react'
+import {Button, Icon, Label, Card, Image, List, Container, Popup, Header} from 'semantic-ui-react';
 import Comments from "../Components/Comments";
-
 import {Link} from "react-router-dom";
 import {Nav} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
 import SubmitHeart from "../APIComponents/SubmitHeart";
 import SubmitMatch from "../APIComponents/SubmitMatch";
 import RemoveHeart from "../APIComponents/RemoveHeart";
@@ -16,11 +12,8 @@ import RemoveMatch from "../APIComponents/RemoveMatch";
 const FeedCard = (props) => {
 
     const [seeComments, setSeeComments] = React.useState(false);
-
     const [hearted, setHeart] = React.useState(props.post.hearted);
-
     const [matched, setMatch] = React.useState(props.post.isMatch ? props.post.matched : false);
-
     const [hearts, setHearts] = React.useState(props.post.hearts > 0 ? props.post.hearts : 0)
     const [comments, setComments] = React.useState(props.post.comments > 0 ? props.post.comments : 0)
 
@@ -106,7 +99,6 @@ const FeedCard = (props) => {
             <Container style={{padding: "10px", marginBottom: 30}}>
                 <Card 
                     style={{width: "100%", padding:"20px", textDecoration: "none"}}
-                    // href={'post/' + props.post.id + '/'}
                     centered
                 >
                     
@@ -134,7 +126,7 @@ const FeedCard = (props) => {
                             {props.post.content}
                         </Header>
                         <LinkContainer to={'/post/' + props.post.id}>
-                  <Nav.Link >
+                    <Nav.Link >
                         <Header as='h4'>
                             I want {props.post.goal} of you to join me.
                         </Header>
@@ -157,39 +149,9 @@ const FeedCard = (props) => {
                         <small style={{color: "black"}}>
                             {hearts} likes | {comments} comments
                         </small>
-                                       
-                     </Nav.Link>
+                    </Nav.Link>
                 </LinkContainer>
-                </Card.Content>
-
-                        {/* const GroupsCard = (props) => {
-    return(
-        <Card>
-            <Card.Content>
-            <Card.Header>{props.header}</Card.Header>
-            </Card.Content>
-      <Card.Content extra>
-        <List.Content>
-          <List selection vertical>
-                {props.groups.map(group => (
-                  <List.Item as={Link} to={"/group/" + group.id.toString()}>
-                    <Image avatar src={group.image}/>
-                    <List.Content>
-                      <List.Header>
-                        {group.name}
-                      </List.Header>
-                    </List.Content>
-                  </List.Item>
-                ))};
-            </List>
-        </List.Content>
-      </Card.Content>
-  </Card>
-  );
-} */}
-
-                    
-
+                </Card.Content>   
                     <Card.Content extra>
                         <List horizontal selection style={{marginLeft: 5}}>
                         <Popup content='Like' basic trigger={
@@ -207,7 +169,7 @@ const FeedCard = (props) => {
 
                             </List.Item>
                         } />
-                         <Popup content='Comment' basic trigger={
+                        <Popup content='Comment' basic trigger={
                             <List.Item onClick={handleExpand}>
                                 <List.Icon 
                                 
@@ -215,7 +177,7 @@ const FeedCard = (props) => {
                                 
                                 size='large' />
                             </List.Item>
-                         } />
+                        } />
 
 
                                 <List.Item
@@ -236,30 +198,20 @@ const FeedCard = (props) => {
                                     </List.Content>
                                 </List.Item>
 
-                         {/* <Popup content='Match'  basic trigger={
-                                <List.Item as={Link} to={"/post/" + props.post.id.toString()} post={props.post} style={{textDecoration: "none"}}>
-                                    <List.Icon name='handshake outline' size='large' />
-                                </List.Item>
-                         } /> */}
                         </List>
                         
                     </Card.Content>                    
 
-                    {/* <Header as='p' dividing style={{display: seeComments ? "" : "none"}}></Header> */}
                     <Comments comments={props.post.comments} img={props.img} visible={seeComments}/>
                 </Card>
-
-                
-
             </Container>
         )
     } else {
         return (
-     
+
             <Container style={{margin: "10px", marginBottom: 30}}>
                 <Card 
                     style={{width: "100%", padding:"20px"}}
-                    // href={'post/' + props.post.id + '/'}
                     centered
                 >
                     
@@ -310,7 +262,7 @@ const FeedCard = (props) => {
 
                             </List.Item>
                         } />
-                         <Popup content='Comment' basic trigger={
+                        <Popup content='Comment' basic trigger={
                             <List.Item onClick={handleExpand}>
                                 <List.Icon 
                                 
@@ -318,7 +270,7 @@ const FeedCard = (props) => {
                                 
                                 size='large' />
                             </List.Item>
-                         } />
+                        } />
 
                                 <List.Item
                                     float="right"
@@ -336,17 +288,9 @@ const FeedCard = (props) => {
                                         </List.Description>
                                     </List.Content>
                                 </List.Item>
-
-                         {/* <Popup content='Match'  basic trigger={
-                                <List.Item as={Link} to={"/post/" + props.post.id.toString()} post={props.post} style={{textDecoration: "none"}}>
-                                    <List.Icon name='handshake outline' size='large' />
-                                </List.Item>
-                         } /> */}
                         </List>
                         
                     </Card.Content>                    
-
-                    {/* <Header as='p' dividing style={{display: seeComments ? "" : "none"}}></Header> */}
                     <Comments comments={props.post.comments} img={props.img} visible={seeComments}/>
                 </Card>
 
