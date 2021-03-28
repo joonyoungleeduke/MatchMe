@@ -3,8 +3,6 @@ import { Card, Icon, Grid, Image, List} from 'semantic-ui-react'
 import LabelWIm from "./LabelWIm";
 import {BsFillLightningFill} from "react-icons/bs"
 import {FaHandsHelping} from "react-icons/fa"
-import {Link} from "react-router-dom";
-
 
 const SuggestedGroups = (props) => {
     return(
@@ -14,7 +12,7 @@ const SuggestedGroups = (props) => {
             <List.Content>
             <List selection vertical>
                   {props.groups.map(group => (
-                    <List.Item as={Link} to={"/group/" + group.id.toString()}>
+                    <List.Item as="a" href={"/group/" + group.id.toString()}>
                       <Image avatar src={group.image}/>
                       <List.Content>
                         <List.Header>
