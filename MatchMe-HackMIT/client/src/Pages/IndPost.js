@@ -129,115 +129,166 @@ const IndPost = (props) => {
     }
     if (post.isMatch) {
         return(
-            <div>
+            <div
+                style={{
+                    width: '100%',
+                    height: '100vh'
+                }}
+            >
                 <NavBar />
-                <Grid centered columns={2}>
-                    <Grid.Column style={{left: -50}}>
-                        <Container text>
-                            <Label as='a' color='blue' ribbon>
-                                {post.group.theme}
-                            </Label>
-                            <Header as ='h1' style={{fontSize: '5em'}}>
-                                {post.group.name}
-                            </Header>
-                            <Header as='h1'>
-                                Match {post.author.first_name}'s lead.
-                            </Header>
-                        </Container>
-                    </Grid.Column>
-                    <Grid.Row centered columns={4}>
-                        <Grid.Column>
-                            <Grid.Row>
-                                <Menu attached='top' tabular fluid widths={2}>
-                                    <Menu.Item
-                                        name='action'
-                                        active={!showComments}
-                                        onClick={handleHideComments}
-                                    >
-                                    </Menu.Item>
-                                    <Menu.Item
-                                        name='comments'
-                                        active={showComments}
-                                        onClick={handleShowComments}
-                                    >
-                                    </Menu.Item>
-                                </Menu>
-                            </Grid.Row>
-                            <Grid.Row fluid>
-                                <Container text style={{display: showComments ? "none" : "", margin: "20px"}}>
-                                            <h2 style={{fontWeight: "bold"}}>
-                                                Here's what I did.
-                                            </h2>
-                                            <h5>
-                                                {post.title}
-                                            </h5>
-                                            <br></br>
-                                            <h3 style={{fontWeight: "bold"}}>
-                                                Why should you care?
-                                            </h3>
-                                            <p>
-                                                {post.description}
-                                            </p>
-                                </Container>
-                                <Container text style={{display: showComments ? "" : "none", margin: "20px"}}>
-                                    <Comments comments={post.comments} visible={showComments} />
-                                </Container>
-                            </Grid.Row>
-                        </Grid.Column>
 
-                        <Grid.Column centered style={{marginLeft: "30px"}}>
-                            <h5>
-                                Contribute to {post.group.name}'s impact.
-                            </h5>
-                            <h5 style={{fontWeight: "bold"}}>
-                                Help get to {post.goal} matches.
-                            </h5>
-                            <br></br>
-                            <Progress percent={((post.matches / post.goal) * 100).toFixed(3)} color="blue"/>
-                            <br></br>
-                            {post.matched ? 
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        width: '100%',
+                        height: '100%',
+                        flexDirection: 'column',
+                        gap: "5%"
+                    }}
+                >
+                    <Container text>
+                        <Label as='a' color='blue' ribbon>
+                            {post.group.theme}
+                        </Label>
+                        <Header as ='h1' style={{fontSize: '5em'}}>
+                            {post.group.name}
+                        </Header>
+                        <Header as='h1'>
+                            Match {post.author.first_name}'s lead.
+                        </Header>
+                    </Container>
 
-                                <Container text>
-                                <Header as ='h1' style={{fontSize: '3em'}}>
-                                    Thank you for contributing. 
-                                </Header>
-                                
-                                </Container>
+                    <div
+                        style={{
+                            display: 'flex',
+                            gap: '5%',
+                            alignItems: 'flex-start'
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column',
+                                gap: '10px',
+                                maxWidth: '600px'
+                            }}
+                        >
+                            <Menu attached='top' tabular fluid widths={2}>
+                                <Menu.Item
+                                    name='action'
+                                    active={!showComments}
+                                    onClick={handleHideComments}
+                                >
+                                </Menu.Item>
+                                <Menu.Item
+                                    name='comments'
+                                    active={showComments}
+                                    onClick={handleShowComments}
+                                >
+                                </Menu.Item>
+                            </Menu>
 
-                                :
+                            <Container text style={{display: showComments ? "none" : "", margin: "20px"}}>
+                                                    <h2 style={{fontWeight: "bold"}}>
+                                                        Here's what I did.
+                                                    </h2>
+                                                    <h5>
+                                                        {post.title}
+                                                    </h5>
+                                                    <br></br>
+                                                    <h3 style={{fontWeight: "bold"}}>
+                                                        Why should you care?
+                                                    </h3>
+                                                    <p>
+                                                        {post.description}
+                                                    </p>
+                                        </Container>
+                            <Container text style={{display: showComments ? "" : "none", margin: "20px"}}>
+                                <Comments comments={post.comments} visible={showComments} />
+                            </Container>
 
-                                <Form>
-                                    <Header>
-                                        Enter your name to confirm.
-                                    </Header>
-                                    <Form.Input placeholder='First Name' />
-                                    <Form.Input placeholder='Last Name' />
+                        </div>
+
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column',
+                                gap: '10px',
+                                maxWidth: '300px'
+                            }}
+                        >
+                                    <h5>
+                                        Contribute to {post.group.name}'s impact.
+                                    </h5>
+                                    <h5 style={{fontWeight: "bold"}}>
+                                        Help get to {post.goal} matches.
+                                    </h5>
+                                    <br></br>
+                                    <Progress percent={((post.matches / post.goal) * 100).toFixed(3)} color="blue"/>
+                                    <br></br>
+                                    {post.matched ? 
+
+                                        <h1 style={{fontSize: '2em'}}>
+                                            Thank you for contributing. 
+                                        </h1>
                                         
-                                    <Form.Button
-                                    onClick={handleMatch}
-                                    fluid 
-                                    basic 
-                                    color='blue'
-                                    icon='handshake outline'
-                                    />                         
-                                    
-                                </Form>
-                        }
+                                        :
 
-    
-                        </Grid.Column>
-                    </Grid.Row>
+                                        <Form>
+                                            <Header>
+                                                Enter your name to confirm.
+                                            </Header>
+                                            <Form.Input placeholder='First Name' />
+                                            <Form.Input placeholder='Last Name' />
+                                                
+                                            <Form.Button
+                                            onClick={handleMatch}
+                                            fluid 
+                                            basic 
+                                            color='blue'
+                                            icon='handshake outline'
+                                            />                         
+                                            
+                                        </Form>
+                                }
 
-                    <Grid.Row centered columns={4} style={{marginTop: "10em"}}>
+            
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+                    <Grid.Row 
+                        centered 
+                        style={{marginTop: "10em",
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                                }}
+                    >
                         <Grid.Column>
-                            <Container>
+                            <Container style={{
+                                display: 'flex',
+                                justifyContent: 'center'
+                            }}>
                                 <Header as ='h1' style={{fontSize: '4em'}}>
                                     Take more action.
                                 </Header>
                                 <Header as='h1'>
                                 </Header>
                             </Container>
-                            <Grid.Row centered columns={2}>
+                            <Grid.Row centered style={{
+                                display: 'flex',
+                                justifyContent: 'space-around'
+                            }}>
                                 <Grid.Column style={{padding: "10px"}}>
                                     <SuggestedGroups groups={suggestions} />
                                 </Grid.Column>
@@ -248,7 +299,6 @@ const IndPost = (props) => {
                             </Grid.Row>
                         </Grid.Column>
                     </Grid.Row>
-                </Grid>
 
             </div>
         )

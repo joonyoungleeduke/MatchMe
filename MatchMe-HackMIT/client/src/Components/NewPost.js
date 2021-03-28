@@ -18,11 +18,16 @@ const NewPost = (props) => {
         description: ""
     });
     const [match_form, setMatchForm] = useState({
-        group: null, 
-        content: "",
+        group: "", 
+        title: "",
+        description: "",
         isMatch: true, 
         goal: 10, 
     })
+
+    useEffect(() => {
+        console.log(match_form);
+    }, [match_form])
 
     useEffect(() => {
         parseOptions()
@@ -84,7 +89,8 @@ const NewPost = (props) => {
         try {
             const response = await axiosInstance.post('api/posts/create/', {
                 group: match_form.group, 
-                content: match_form.content,
+                title: match_form.title,
+                description: match_form.description,
                 isMatch: match_form.isMatch, 
                 goal: match_form.goal, 
             });
@@ -124,24 +130,32 @@ const NewPost = (props) => {
         })
     }
 
-
-    const handleMatchChange = (e, { value })  => {
-        const obj = {...match_form};
-        obj.content = value; 
-        setMatchForm(obj); 
+    const handleMatchSelectChange = (e, { value }) => {
+        setMatchForm({
+            ...match_form,
+            group: value,
+        })
     }
 
+    const handleMatchTitleChange = (e, { value })  => {
+        setMatchForm({
+            ...match_form, 
+            title: value,
+        }) 
+    }
 
-    const handleMatchSelectChange = (e, { value }) => {
-        const obj = {...match_form};
-        obj.group = value; 
-        setMatchForm(obj);
+    const handleMatchDescChange = (e, { value })  => {
+        setMatchForm({
+            ...match_form,
+            description: value,
+        }) 
     }
 
     const handleGoalChange = (e, value) => {
-        const obj = {...match_form};
-        obj.goal = value; 
-        setMatchForm(obj);
+        setMatchForm({
+            ...match_form,
+            goal: value,
+        })
     }
 
     const handleBlur = () => {
@@ -285,14 +299,14 @@ const NewPost = (props) => {
                                     onChange = {handleMatchSelectChange}
                                 />
                             </Form.Group>
-                            <Form.Field control={Input} required name='content'  placeholder="What action did you take?" onChange = {handleMatchChange}/>
+                            <Form.Field control={Input} required name='title'  placeholder="What action did you take?" onChange = {handleMatchTitleChange}/>
 
                             <Form.Field 
                                 required 
                                 control={TextArea}
-                                name='reason'
+                                name='description'
                                 placeholder='Tell us your reason for taking it.'
-                                onChange = {handleMatchChange}
+                                onChange = {handleMatchDescChange}
                             />
 
                             <Form.Group style={styles.slider}>

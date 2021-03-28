@@ -77,7 +77,7 @@ class PostViewSet(viewsets.ModelViewSet):
             posts = Post.objects.all().filter(isMatch=True).order_by('hearts').distinct() 
 
             serializer = PostSendSerializer(posts, many=True)
-
+            
             return Response(serializer.data, status=status.HTTP_200_OK)
 
 

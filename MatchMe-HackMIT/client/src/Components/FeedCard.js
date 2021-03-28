@@ -123,7 +123,7 @@ const FeedCard = (props) => {
                     
                     <Card.Content>
                         <Header as='h2'>
-                            {props.post.content}
+                            {props.post.title}
                         </Header>
                         <LinkContainer to={'/post/' + props.post.id}>
                     <Nav.Link >
@@ -237,7 +237,7 @@ const FeedCard = (props) => {
 
                     <Card.Content>
                         <Header as='h4'>
-                            {props.post.content}
+                            {props.post.title}
                         </Header>
                         <small>
                             {hearts} likes | {comments} comments
