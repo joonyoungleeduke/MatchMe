@@ -11,7 +11,6 @@ const DropDown = (props) => {
     return (
         <Dropdown
         text={props.text}
-        selection
         search
         style={{width: 250}}
       >

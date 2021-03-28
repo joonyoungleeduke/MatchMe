@@ -9,7 +9,7 @@ const App = props => {
   
   useEffect(() => {
     document.title = "MatchMe";
-}, {});
+}, []);
 
 return(
     <div>

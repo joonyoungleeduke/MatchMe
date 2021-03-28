@@ -75,7 +75,7 @@ class Register extends Component{
     render() {
         return (
             <div className="container justify-content-center align-items-center">
-                <div class="row justify-content-center">
+                <div className="row justify-content-center">
                     <h3 style={{marginBottom: 40, marginTop: 20}}>Find Your Community.</h3>
                     <div className="col-md-9" style={styles.register_form}>
                         <form onSubmit={this.handleSubmit}>
@@ -85,13 +85,13 @@ class Register extends Component{
                             <div className="form-group">
                                 <input type="text" name="first_name" className="form-control" placeholder="First Name" onChange={this.handleChange} value={this.state.first_name}/>
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <input type="text" name="last_name" className="form-control" placeholder="Last Name" onChange={this.handleChange} value={this.state.last_name}/>
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <input type="text" name="email" className="form-control" placeholder="Email" onChange={this.handleChange} value={this.state.email}/>
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <input type="password" name="password" className="form-control" placeholder="Password" onChange={this.handleChange} value={this.state.password}/>
                             </div>
                             <button type="submit" value="submit" className="btn btn-primary btn-block" >Register</button>

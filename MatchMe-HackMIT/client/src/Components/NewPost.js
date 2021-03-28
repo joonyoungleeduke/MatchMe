@@ -212,7 +212,7 @@ const NewPost = (props) => {
                 <Popup content='Event' trigger={
                     <List.Item>
                         <List.Content>
-                            <Image size={30} className="attachButton">
+                            <Image size="tiny" className="attachButton">
                                 <List.Icon name = "map pin" size="large" />
                             </Image>
                         </List.Content>
@@ -337,7 +337,7 @@ const NewPost = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Input 
-                                            className={styles.input}
+                                            styles={styles.input}
                                             value={match_form.goal}
                                             margin="dense"
                                             onChange={handleGoalInputChange}
@@ -373,13 +373,13 @@ const styles = {
         padding: 10,
         width: "100%",
         display: "flex",
-        "flex-direction": "column",
-        "align-items": "center",
+        flexDirection: "column",
+        alignItems: "center",
     },
     slider: {
         display: "flex",
-        "flex-direction": "column",
-        "align-items": "center",
+        flexDirection: "column",
+        alignItems: "center",
     },
     input: {
         width: 42, 

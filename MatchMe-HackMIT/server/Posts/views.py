@@ -9,7 +9,7 @@ from server.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status 
-
+from shared import permissions as shared_perms 
 
 
 # class HeartSerializer(serializers.ModelSerializer):
@@ -57,6 +57,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer 
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly,
     #                         IsOwnerOrReadOnly]
+    permission_classes = [shared_perms.AnyAuthIfGet]
     
     def create(self, request):
         try: 

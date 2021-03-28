@@ -47,15 +47,15 @@ class Login extends Component {
     render() {
         return (
                 <div className="container justify-content-center align-items-center"> 
-                <div class="row justify-content-center">
+                <div className="row justify-content-center">
                     <h2 style={{marginBottom: 30}}>Welcome Back</h2>
-                    <div class="col-md-9" style={styles.login_form}>
+                    <div className="col-md-9" style={styles.login_form}>
                         <form onSubmit={this.handleSubmit}>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <input name="username" type="username" className="form-control inputField" placeholder="Username" onChange={this.handleChange} value={this.state.username} 
                                 />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <input name="password" type="password" className="form-control inputField" placeholder="Password" onChange={this.handleChange} value={this.state.password}/>
                             </div>
                             <button type="submit" className="btn btn-primary btn-block" >Log In</button>

@@ -337,7 +337,7 @@ const NewPost = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Input 
-                                            className={styles.input}
+                                            style={styles.input}
                                             value={match_form.goal}
                                             margin="dense"
                                             onChange={handleGoalInputChange}
@@ -373,13 +373,13 @@ const styles = {
         padding: 10,
         width: "100%",
         display: "flex",
-        "flex-direction": "column",
-        "align-items": "center",
+        flexDirection: "column",
+        alignItems: "center",
     },
     slider: {
         display: "flex",
-        "flex-direction": "column",
-        "align-items": "center",
+        flexDirection: "column",
+        alignItems: "center",
     },
     input: {
         width: 42, 

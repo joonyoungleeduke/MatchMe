@@ -9,15 +9,15 @@ const GroupPage = (props) => {
     const handleButton = () => {
         if (props.groupjoined) {
             return (
-                <button class="ui disabled button" style={{marginLeft: 50}}>
-                <i class="user icon"></i>
+                <button className="ui disabled button" style={{marginLeft: 50}}>
+                <i className="user icon"></i>
                 Joined
             </button>
             );
         } else {
             return (
-            <button class="ui active button" style={{marginLeft: 50}}>
-                <i class="user icon"></i>
+            <button className="ui active button" style={{marginLeft: 50}}>
+                <i className="user icon"></i>
                 Join
             </button>
             );
@@ -47,8 +47,8 @@ const GroupPage = (props) => {
             <div style={{fontSize: 20, flex: 1, flexDirection: "row", marginLeft: "auto", justifyContent:"space-between"}}>
                 {props.membercount} Members
                 {handleButton()}
-                <button class="ui primary button invite" style={{marginLeft: 10}}>
-                    <i class="plus icon"></i>
+                <button className="ui primary button invite" style={{marginLeft: 10}}>
+                    <i className="plus icon"></i>
                     Invite
                 </button>
             </div>

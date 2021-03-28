@@ -13,7 +13,9 @@ const GroupsCard = (props) => {
             </Card.Content>
       <Card.Content extra>
         <List.Content>
-          <List selection vertical>
+          <List 
+            selection 
+            vertical>
                 {props.groups.map(group => (
                   <List.Item as={Link} to={"/group/" + group.id.toString()}>
                     <Image avatar src={group.image}/>

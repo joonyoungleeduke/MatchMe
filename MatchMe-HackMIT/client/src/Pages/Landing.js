@@ -44,7 +44,7 @@ const Landing = (props) => {
 
     useEffect(() => {
         getTrending();
-    }, {});
+    }, []);
 
     async function getTrending() {
         let posts = await PopularPosts();
@@ -145,7 +145,7 @@ const Landing = (props) => {
                 open={openLogin}
                 trigger={
                     <Container textAlign = "center" style={{ padding: "5em 0em", marginTop: 25}}>
-                        <Button content="Join" color="primary" size="big"/> 
+                        <Button content="Join" color="blue" size="big"/> 
                     </Container>
                     }
                     size="tiny"
@@ -244,55 +244,54 @@ const Landing = (props) => {
 
 */}
                 <Modal 
-                closeOnDimmerClick={false}
-                onClose={() => {setOpenInterests(false)}}
-                onOpen={() => {setOpenInterests(true)}}
-                open={openInterests}
-                size="medium" 
-                    > 
+                    closeOnDimmerClick={false}
+                    onClose={() => {setOpenInterests(false)}}
+                    onOpen={() => {setOpenInterests(true)}}
+                    open={openInterests}
+                > 
                         <Modal.Header>Select Your Passions</Modal.Header>
                         <Modal.Content scrolling >
-                        <div class="row justify-content-md-center mb-3">
-                            <div class="col">
+                        <div className="row justify-content-md-center mb-3">
+                            <div className="col">
                             <InterestCard name="Charity" src={require("../Images/charity.jpg")} />
                             </div>
 
-                            <div class="col" >
+                            <div className="col" >
                             <InterestCard name="Social Justice" src={require("../Images/social.jpg")}  />
                             </div>
 
-                            <div class="col" >
+                            <div className="col" >
                             <InterestCard name="Global Health" src={require("../Images/ghealth.jpg")}  />
                             </div>
 
-                            <div class="col" >
+                            <div className="col" >
                             <InterestCard name="Disability Awareness" src={require("../Images/disabliity.jpg")}  />
                             </div>
 
-                            <div class="col" >
+                            <div className="col" >
                             <InterestCard name="LGBTQ+ Rights" src={require("../Images/lgbtq.jpg")}  />
                             </div>
 
                         </div>
-                        <div class="row justify-content-md-center">
-                            <div class="col" >
+                        <div className="row justify-content-md-center">
+                            <div className="col" >
                             <InterestCard name="Environment" src={require("../Images/env.jpg")}  />
                             </div>
 
-                            <div class="col" >
+                            <div className="col" >
                             <InterestCard name="Political Advocacy" src={require("../Images/politic.jpg")}  />
                             </div>
 
-                            <div class="col" >
+                            <div className="col" >
                             <InterestCard name="Income Inequality" src={require("../Images/income.jpg")}  />
                             </div>
 
-                            <div class="col" >
+                            <div className="col" >
                             <InterestCard name="Elderly Aid" src={require("../Images/elder.jpg")}  />
                             </div>
 
-                            <div class="col" >
-                            <InterestCard name="Human Rights" src={require("../Images/huright.jpg")}  />
+                            <div className="col" >
+                                <InterestCard name="Human Rights" src={require("../Images/huright.jpg")}  />
                             </div>
                         </div>
                         </Modal.Content>

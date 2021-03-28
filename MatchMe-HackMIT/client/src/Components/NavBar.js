@@ -69,43 +69,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-function searchReducer(state, action) {
-  switch (action.type) {
-    case "CLEAN_QUERY":
-      return initialState 
-    case "START_SEARCH":
-      return { ...state, loading: true, value: action.query}
-    case "FINISH_SEARCH":
-      return { ...state, loading: false, results: action.results }
-    case "UPDATE_SELECTION":
-      return { ...state, value: action.selection }
-    
-    default: 
-      throw new Error() 
-  }
-}
-
-let source = getSearchResults(); 
-
-async function getSearchResults() {
-  let results = await SearchResults();
-  source = results; 
-}
-
 const NavBar = (props) => {
   const classes = useStyles();
-  // const [source, setSource] = React.useState([]);
-  const [state, setState] = React.useReducer(searchReducer, initialState)
-  const { loading, results, value } = state 
-
-  // async function getSearchResults() {
-
-  //   let results = await SearchResults(); 
-
-  //   return results; 
-  //  }
 
   async function handleLogout() {
     try {
@@ -121,30 +86,6 @@ const NavBar = (props) => {
       console.log(e);
     }
   }
-
-  const timeoutRef = React.useRef()
-  const handleSearchChange = React.useCallback((e, data) => {
-    clearTimeout(timeoutRef.current)
-    setState({ type: 'START_SEARCH', query: data.value })
-
-    timeoutRef.current = setTimeout(() => {
-      if (data.value.length === 0) {
-        setState({ type: 'CLEAN_QUERY' })
-        return
-      }
-
-      const re = new RegExp(_.escapeRegExp(data.value), 'i')
-      const isMatch = (result) => re.test(result.title)
-
-      console.log(source);
-
-      setState({
-        type: 'FINISH_SEARCH',
-        results: _.filter(source, isMatch)
-      })
-
-    }, 300)
-  }, [])
 
   async function getGroups() {
     let results = await AllGroups(); 
@@ -210,11 +151,6 @@ const NavBar = (props) => {
   }
 
   React.useEffect(() => {
-    // let result = getSearchResults(); 
-    // result.then((result) => {
-    //   setSource(result);
-    //   console.log(result);
-    // })
     let data = getGroups();
     data.then((data) => {
       parseOptions(data)
@@ -223,10 +159,6 @@ const NavBar = (props) => {
     data2.then((data) => {
       parseThemes(data); 
     })
-    // return () => {
-    //   clearTimeout(timeoutRef.current)
-    // }
-
   }, []);
 
   return (
@@ -275,34 +207,34 @@ const NavBar = (props) => {
 
         <LinkContainer to="/feed">
           <Nav.Link >
-          <div style={{ textAlign: "center", marginBottom: 2}}>
-            <TiHome size={25}/>
-          </div>
-          Home
+            <div style={{ textAlign: "center", marginBottom: 2}}>
+              <TiHome size={25}/>
+            </div>
+            Home
           </Nav.Link>
         </LinkContainer>
         <LinkContainer to="/create/group">
           <Nav.Link >
-          <div style={{ textAlign: "center", marginBottom: 2}}>
-            <BiPaperPlane size={25}/>
-          </div>
+            <div style={{ textAlign: "center", marginBottom: 2}}>
+              <BiPaperPlane size={25}/>
+            </div>
           New Group
           </Nav.Link>
         </LinkContainer>
         <LinkContainer to="/feed">
           <Nav.Link >
-          <div style={{ textAlign: "center", marginBottom: 2}}>
-            <BiPaperPlane size={25}/>
-          </div>
-          Message
+            <div style={{ textAlign: "center", marginBottom: 2}}>
+              <BiPaperPlane size={25}/>
+            </div>
+            Message
           </Nav.Link>
         </LinkContainer>
         <LinkContainer to="/profile" >
         <Nav.Link>
-          <div style={{ textAlign: "center", marginBottom: 2}}>
-          <FaUserAlt style={{fontSize: 25}}/>
-          </div>
-          Profile
+            <div style={{ textAlign: "center", marginBottom: 2}}>
+              <FaUserAlt style={{fontSize: 25}}/>
+            </div>
+            Profile
           </Nav.Link>
       </LinkContainer>
       </Nav>

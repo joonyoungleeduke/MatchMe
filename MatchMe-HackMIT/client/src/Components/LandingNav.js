@@ -85,26 +85,9 @@ function searchReducer(state, action) {
   }
 }
 
-let source = getSearchResults(); 
-
-async function getSearchResults() {
-  let results = await SearchResults();
-  source = results; 
-}
-
 const LandingNav = (props) => {
   const classes = useStyles();
-  // const [source, setSource] = React.useState([]);
   const [state, setState] = React.useReducer(searchReducer, initialState)
-  const { loading, results, value } = state 
-
-  // async function getSearchResults() {
-
-  //   let results = await SearchResults(); 
-
-  //   return results; 
-  //  }
-
   async function handleLogout() {
     try {
       const response = await axiosInstance.post('logout/', {
@@ -119,30 +102,6 @@ const LandingNav = (props) => {
       console.log(e);
     }
   }
-
-  const timeoutRef = React.useRef()
-  const handleSearchChange = React.useCallback((e, data) => {
-    clearTimeout(timeoutRef.current)
-    setState({ type: 'START_SEARCH', query: data.value })
-
-    timeoutRef.current = setTimeout(() => {
-      if (data.value.length === 0) {
-        setState({ type: 'CLEAN_QUERY' })
-        return
-      }
-
-      const re = new RegExp(_.escapeRegExp(data.value), 'i')
-      const isMatch = (result) => re.test(result.title)
-
-      console.log(source);
-
-      setState({
-        type: 'FINISH_SEARCH',
-        results: _.filter(source, isMatch)
-      })
-
-    }, 300)
-  }, [])
 
   async function getGroups() {
     let results = await AllGroups(); 
@@ -186,7 +145,7 @@ const LandingNav = (props) => {
     <Navbar bg="primary" variant="dark" fixed="top"
     >
 
-    <div class="mx-auto" style={{display: "flex", justifyContent:"center", paddingTop: 10}}>
+    <div className="mx-auto" style={{display: "flex", justifyContent:"center", paddingTop: 10}}>
         <div style={{paddingTop: 10}}>
             <FaHandsHelping size={30} color="white"/>
         </div>

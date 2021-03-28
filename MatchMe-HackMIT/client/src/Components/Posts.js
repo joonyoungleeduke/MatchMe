@@ -12,10 +12,12 @@ function Posts(props) {
 
     return (
         <div style={{ width: "100%", marginTop: 20}}>
-            {props.posts.map(post => (
-                // <FeedCard isMatch={post.isMatch} post={post} img={props.img}/>
-                
-                <FeedCard isMatch={post.isMatch} post={post}/>
+            {
+                props.posts && 
+                props.posts.map(post => (
+                    // <FeedCard isMatch={post.isMatch} post={post} img={props.img}/>
+                    
+                    <FeedCard isMatch={post.isMatch} post={post}/>
 
             ))}
         </div>
