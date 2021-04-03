@@ -38,7 +38,6 @@ const Landing = (props) => {
     const [openRegister, setOpenRegister] = React.useState(false)
     const [openEditProfile, setOpenEditProfile] = React.useState(false)
     const [openInterests, setOpenInterests] = React.useState(false)
-    const [image, setImage] = React.useState([]);
 
     useEffect(() => {
         getTrending();
@@ -52,11 +51,7 @@ const Landing = (props) => {
         })
     }
 
-    const handleImageChange = e => { 
-        setImage(e.target.files[0]);
-    }
-
-    async function handleDone(event) {
+    async function redirectIfLoggedIn(event) {
 
         const username = localStorage.getItem('username');
         const password = localStorage.getItem('password');
@@ -78,12 +73,23 @@ const Landing = (props) => {
 
             if (response.status === 200) {
                 props.history.push("/feed");
+                return true;
             }
         
-            return response.data;
+            return false;
         } catch (error) {
-            throw error;
+            return false;
         }
+    }
+
+    async function onOpenLogin () {
+        // const loggedIn = await redirectIfLoggedIn();
+        // if (!loggedIn) setOpenLogin(true);
+        setOpenLogin(true);
+    }
+
+    function onCloseLogin () {
+        setOpenLogin(false);
     }
 
     return (
@@ -101,7 +107,6 @@ const Landing = (props) => {
                         "Alone we can do so little. Together we can do so much."
                     </p>
 
-
                     <Step.Group items={steps}/>
 
                 </Container>
@@ -109,37 +114,31 @@ const Landing = (props) => {
                 <img src={require("../Images/pp1.png")} style={{width: 360, position: "absolute",  left: 55, top: 270}}/>
                 
                 <Modal
-                onClose={() => setOpenLogin(false)}
-                onOpen={() => setOpenLogin(true)}
-                open={openLogin}
-                trigger={
-                    <Container textAlign = "center" style={{ padding: "5em 0em", marginTop: 25}}>
-                        <Button content="Join" color="blue" size="big"/> 
-                    </Container>
+                    onClose={() => onCloseLogin()}
+                    onOpen={() => onOpenLogin()}
+                    open={openLogin}
+                    trigger={
+                        <Container textAlign = "center" style={{ padding: "5em 0em", marginTop: 25}}>
+                            <Button content="Join" color="blue" size="big"/> 
+                        </Container>
                     }
                     size="tiny"
                 >
                     <Modal.Content>
-                
-
-
                         <Login close={() => {setOpenLogin(false)}}/>
                         <p className="forgot-password text-right" style={{marginTop: 20, marginRight: 72}}>
                                 Need an account? <a href="#" onClick={() => {
                                     setOpenLogin(false)
                                     setOpenRegister(true)}}>Register</a>
                         </p>
-
-
-
                     </Modal.Content>
                 </Modal>
 
                 <Modal
-                onClose={() => setOpenRegister(false)}
-                onOpen={() => setOpenRegister(true)}
-                open={openRegister}
-                size="tiny"
+                    onClose={() => setOpenRegister(false)}
+                    onOpen={() => setOpenRegister(true)}
+                    open={openRegister}
+                    size="tiny"
                 >
                     <Modal.Content>
                         <Register func={() => {setOpenRegister(false)}} func1={() => {setOpenInterests(true)}} />
@@ -160,53 +159,54 @@ const Landing = (props) => {
                 > 
                         <Modal.Header>Select Your Passions</Modal.Header>
                         <Modal.Content scrolling >
-                        <div className="row justify-content-md-center mb-3">
-                            <div className="col">
-                            <InterestCard name="Charity" src={require("../Images/charity.jpg")} />
-                            </div>
+                            <div className="row justify-content-md-center mb-3">
+                                <div className="col">
+                                    <InterestCard name="Charity" src={require("../Images/charity.jpg")} />
+                                </div>
 
-                            <div className="col" >
-                            <InterestCard name="Social Justice" src={require("../Images/social.jpg")}  />
-                            </div>
+                                <div className="col" >
+                                    <InterestCard name="Social Justice" src={require("../Images/social.jpg")}  />
+                                </div>
 
-                            <div className="col" >
-                            <InterestCard name="Global Health" src={require("../Images/ghealth.jpg")}  />
-                            </div>
+                                <div className="col" >
+                                    <InterestCard name="Global Health" src={require("../Images/ghealth.jpg")}  />
+                                </div>
 
-                            <div className="col" >
-                            <InterestCard name="Disability Awareness" src={require("../Images/disabliity.jpg")}  />
-                            </div>
+                                <div className="col" >
+                                    <InterestCard name="Disability Awareness" src={require("../Images/disabliity.jpg")}  />
+                                </div>
 
-                            <div className="col" >
-                            <InterestCard name="LGBTQ+ Rights" src={require("../Images/lgbtq.jpg")}  />
-                            </div>
+                                <div className="col" >
+                                    <InterestCard name="LGBTQ+ Rights" src={require("../Images/lgbtq.jpg")}  />
+                                </div>
 
-                        </div>
-                        <div className="row justify-content-md-center">
-                            <div className="col" >
-                            <InterestCard name="Environment" src={require("../Images/env.jpg")}  />
                             </div>
+                            <div className="row justify-content-md-center">
+                                <div className="col" >
+                                    <InterestCard name="Environment" src={require("../Images/env.jpg")}  />
+                                </div>
 
-                            <div className="col" >
-                            <InterestCard name="Political Advocacy" src={require("../Images/politic.jpg")}  />
-                            </div>
+                                <div className="col" >
+                                    <InterestCard name="Political Advocacy" src={require("../Images/politic.jpg")}  />
+                                </div>
 
-                            <div className="col" >
-                            <InterestCard name="Income Inequality" src={require("../Images/income.jpg")}  />
-                            </div>
+                                <div className="col" >
+                                    <InterestCard name="Income Inequality" src={require("../Images/income.jpg")}  />
+                                </div>
 
-                            <div className="col" >
-                            <InterestCard name="Elderly Aid" src={require("../Images/elder.jpg")}  />
-                            </div>
+                                <div className="col" >
+                                    <InterestCard name="Elderly Aid" src={require("../Images/elder.jpg")}  />
+                                </div>
 
-                            <div className="col" >
-                                <InterestCard name="Human Rights" src={require("../Images/huright.jpg")}  />
+                                <div className="col" >
+                                    <InterestCard name="Human Rights" src={require("../Images/huright.jpg")}  />
+                                </div>
                             </div>
-                        </div>
                         </Modal.Content>
                         <Modal.Actions>
-                        <Button onClick={handleDone} primary>
-                            Done <Icon name='chevron right' />
+                            <Button onClick={() => redirectIfLoggedIn()} primary>
+                                Done 
+                                <Icon name='chevron right' />
                             </Button>
                         </Modal.Actions>
                         </Modal>
