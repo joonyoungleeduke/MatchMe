@@ -6,6 +6,8 @@ This is a fun side project that started out as an idea for HackMIT, and that wen
 
 **There is a lot to fix with this project! It is a fun full-stack side project that you can fork and refine as much or as little as you want. It was made in the short time of a Hackathon and is akin to a MVP.** 
 
+**This also means that there is no protection for the Django secret keys used here... because they are meant to be local only servers for development!**
+
 ## Project Structure
 
 Each of MatchMe-New and MatchMe-HackMIT consist of a server repository (Django) and client side (React). Their core difference is that MatchMe-New is a branch to test out GraphQL with Django and React. It is NOT intended to be run locally, whereas MatchMe-HackMIT can be run locally. 
