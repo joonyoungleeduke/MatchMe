@@ -13,8 +13,3 @@ async function AddMember(group_id, user_id) {
 };
 
 export default AddMember;
-
-
-
-
-    // path('groups/<int:pk>/add_user/<int:user_id>/', add_member, name='add-member'),
