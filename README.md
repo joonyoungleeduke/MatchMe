@@ -1,5 +1,9 @@
 # MatchMe
 
+## Collaborators
+* Alicia Wu [Personal Website](https://aliciatwu.com/).
+* Joon Young Lee [Personal Website](https://joonyounglee.com/).
+
 ## What is this project?
 
 This is a fun side project that started out as an idea for HackMIT, and that went on to receive the Community Prize from Facebook. The core idea is to create a platform where users can share all sorts of interests and actions they've taken towards those interests, and find others to 'match' their actions, generating group, as opposed to individual, action.
